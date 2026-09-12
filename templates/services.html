@@ -1,0 +1,276 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Nehemiah Erika Lorot | Services
+{% endblock %}
+
+{% block content %}
+<main class="w-full overflow-hidden bg-white font-mont">
+    <section class="relative overflow-hidden bg-[#CFE4FF] pt-28 pb-20 lg:pt-36 lg:pb-28">
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#0065E1]">What I Do</p>
+                <h1 class="mt-5 text-4xl font-bold leading-tight tracking-tight text-[#011A38] sm:text-5xl lg:text-6xl">
+                    Practical digital solutions for <span class="text-[#0065E1]">real business needs.</span>
+                </h1>
+                <p class="mt-6 max-w-2xl text-base leading-8 text-slate-600 lg:text-lg">
+                    I combine business analysis, thoughtful design and modern technology to help turn complex ideas into useful, reliable digital experiences.
+                </p>
+                <a href="{% url 'contacts:contacts' %}" class="mt-8 inline-flex items-center gap-2 bg-[#011A38] px-6 py-3.5 text-sm font-semibold text-[white] transition hover:bg-[#0065E1]">
+                    Start a conversation <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 lg:py-24">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="max-w-2xl">
+                <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#0065E1]">Capabilities</p>
+                <h2 class="mt-4 text-3xl font-bold tracking-tight text-[#011A38] sm:text-4xl">From first question to finished solution.</h2>
+                <p class="mt-5 leading-7 text-gray-600">Services shaped around the way I work: understand the problem, choose the right tools and build something that creates value.</p>
+            </div>
+
+            <div class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+                <article class="service-card">
+                    <div class="icon-box navy">
+                        <i data-lucide="monitor-cog"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Responsive websites and full-stack web applications built with modern frontend and backend technologies.</p>
+                    <div class="tags">
+                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Django</span>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="icon-box blue">
+                        <i data-lucide="panels-top-left"></i>
+                    </div>
+                    <h3>Business Systems</h3>
+                    <p>Digital systems that organize information, digitize processes and support everyday business operations.</p>
+                    <div class="tags">
+                        <span>Information Systems</span>
+                        <span>CRUD Systems</span>
+                        <span>Dashboards</span>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="icon-box green">
+                        <i data-lucide="scan-search"></i>
+                    </div>
+                    <h3>Business Analysis</h3>
+                    <p>Clear requirements and practical recommendations created by examining processes, needs and opportunities.</p>
+                    <div class="tags">
+                        <span>Requirements</span>
+                        <span>Process Analysis</span>
+                        <span>Problem Solving</span>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="icon-box navy">
+                        <i data-lucide="pen-line"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Clean, intuitive interfaces designed to make digital products easier to understand, navigate and use.</p>
+                    <div class="tags">
+                        <span>UI Design</span>
+                        <span>Wireframing</span>
+                        <span>Design Systems</span>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="icon-box blue">
+                        <i data-lucide="server-cog"></i>
+                    </div>
+                    <h3>Database &amp; Data Solutions</h3>
+                    <p>Structured, reliable data foundations that support application functionality and informed decisions.</p>
+                    <div class="tags">
+                        <span>MySQL</span>
+                        <span>PostgreSQL</span>
+                        <span>SQL</span>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="icon-box navy">
+                        <i data-lucide="blocks"></i>
+                    </div>
+                    <h3>Software Engineering</h3>
+                    <p>Structured and maintainable software developed with practical programming and delivery workflows.</p>
+                    <div class="tags">
+                        <span>Python</span>
+                        <span>Flask</span>
+                        <span>REST APIs</span>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="icon-box blue">
+                        <i data-lucide="image-plus"></i>
+                    </div>
+                    <h3>Graphic Design</h3>
+                    <p>Professional visual identities, marketing graphics and digital assets for growing businesses.</p>
+                    <div class="tags">
+                        <span>Brand Identity</span>
+                        <span>Graphic Design</span>
+                        <span>Digital Assets</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-y border-gray-200 bg-gray-50 py-20 lg:py-24">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#0065E1]">Technology</p>
+                    <h2 class="mt-4 text-3xl font-bold tracking-tight text-[#011A38] sm:text-4xl">Tools I work with.</h2>
+                </div>
+                <p class="max-w-xl leading-7 text-gray-600">A growing toolkit supporting my work across software development, databases, design and digital solutions.</p>
+            </div>
+            <div class="mt-10 flex flex-wrap gap-3">
+                <span class="tech">Python</span>
+                <span class="tech">Django</span>
+                <span class="tech">Flask</span>
+                <span class="tech">JavaScript</span>
+                <span class="tech">HTML</span>
+                <span class="tech">CSS</span>
+                <span class="tech">Tailwind CSS</span>
+                <span class="tech">MySQL</span>
+                <span class="tech">PostgreSQL</span>
+                <span class="tech">SQLite</span>
+                <span class="tech">Git</span>
+                <span class="tech">GitHub</span>
+                <span class="tech">REST APIs</span>
+                <span class="tech">Graphic Design</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[#DEFFE2] py-20 lg:py-24">
+        <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
+            <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#0065E1]">
+                Let's Work Together
+            </p>
+            <h2 class="mt-4 text-3xl font-bold tracking-tight text-[#011A38] sm:text-4xl">
+                Have a business challenge worth solving?
+            </h2>
+            <p class="mx-auto mt-5 max-w-2xl leading-7 text-gray-600">
+                Let’s explore how thoughtful design and the right technology can move it forward.
+            </p>
+            <a href="{% url 'contacts:contacts' %}" class="mt-8 inline-flex items-center gap-2 bg-[#011A38] px-6 py-3.5 text-sm font-semibold text-[white] transition hover:bg-[#0065E1]">
+                Let's Connect
+                <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <style>
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e5e7eb;
+            background: white;
+            padding: 1.75rem;
+            transition: all .3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-.25rem);
+            border-color: #0065e1;
+            box-shadow: 0 10px 20px rgba(1, 26, 56, .08);
+        }
+
+        .service-card h3 {
+            margin-top: 2rem;
+            color: #011a38;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            flex: 1;
+            margin-top: .75rem;
+            color: #4b5563;
+            font-size: .875rem;
+            line-height: 1.5rem;
+        }
+
+        .icon-box {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .icon-box svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: .75rem;
+            box-sizing: content-box;
+        }
+
+        .icon-box span {
+            color: #d1d5db;
+            font-size: .875rem;
+            font-weight: 700;
+        }
+
+        .icon-box.navy svg {
+            background: #011a38;
+            color: white;
+        }
+
+        .icon-box.blue svg {
+            background: #0065e1;
+            color: white;
+        }
+
+        .icon-box.green svg {
+            background: #01c910;
+            color: #011a38;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tags span {
+            border-radius: 9999px;
+            background: #f1f5f9;
+            padding: .4rem .7rem;
+            color: #475569;
+            font-size: .7rem;
+            font-weight: 600;
+        }
+
+        .tech {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #cbd5e1;
+            border-radius: 9999px;
+            background: white;
+            padding: .65rem 1rem;
+            color: #334155;
+            font-size: .8rem;
+            font-weight: 600;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .tech:hover {
+            border-color: #0065e1;
+            color: #0065e1;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
+</main>
+{% endblock %}

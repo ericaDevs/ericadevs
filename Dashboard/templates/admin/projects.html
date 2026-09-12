@@ -1,0 +1,474 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}Manage Projects{% endblock %}
+{% block breadcrumb %}Projects{% endblock %}
+{% block page_title %}Projects{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <!-- Top Action & Stats Bar -->
+    <div class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6 shadow-xs">
+        <div>
+            <div class="flex items-center gap-2.5">
+                <h2 class="text-xl font-bold text-navy">Portfolio Projects</h2>
+                <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-700 border border-slate-200">
+                    {{ projects|length }} Total
+                </span>
+            </div>
+            <p class="mt-1 text-xs text-slate-500">Add, edit, view, and organize showcase items on your public portfolio.</p>
+        </div>
+
+        <button type="button" id="open-project-modal-btn" class="inline-flex items-center justify-center gap-2 rounded-lg bg-blue px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-hover transition cursor-pointer shrink-0">
+            <i data-lucide="plus" class="h-4 w-4"></i>
+            Add Project
+        </button>
+    </div>
+
+    <!-- Projects Table Container -->
+    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs">
+        <div class="border-b border-slate-200 bg-slate-50/70 px-5 py-3.5 sm:px-6 flex items-center justify-between">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">All Published Projects</h3>
+            <span class="text-xs text-slate-500">Sorted by newest date</span>
+        </div>
+
+        {% if projects %}
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-left text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-200 bg-slate-50 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-5 py-3 sm:px-6">Project</th>
+                            <th class="px-5 py-3 sm:px-6">Technologies</th>
+                            <th class="px-5 py-3 sm:px-6">Date</th>
+                            <th class="px-5 py-3 sm:px-6">Live Link</th>
+                            <th class="px-5 py-3 text-right sm:px-6">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        {% for project in projects %}
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-5 py-4 sm:px-6">
+                                <div class="flex items-center gap-3.5">
+                                    {% if project.cover_photo %}
+                                        <img src="{{ project.cover_photo.url }}" alt="{{ project.title }}" class="h-11 w-14 rounded-md object-cover border border-slate-200 bg-slate-100 shrink-0" />
+                                    {% else %}
+                                        <div class="flex h-11 w-14 items-center justify-center rounded-md border border-slate-200 bg-slate-100 text-slate-400 shrink-0">
+                                            <i data-lucide="image" class="h-5 w-5"></i>
+                                        </div>
+                                    {% endif %}
+                                    <div>
+                                        <p class="font-semibold text-navy leading-tight">{{ project.title }}</p>
+                                        <p class="text-xs text-slate-400 mt-1 font-mono">/projects/{{ project.slug }}/</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-5 py-4 sm:px-6">
+                                <div class="flex flex-wrap gap-1 max-w-xs">
+                                    {% if project.technologies %}
+                                        {% for tech in project.technologies %}
+                                            <span class="inline-block rounded bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700 border border-slate-200">
+                                                {{ tech }}
+                                            </span>
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="text-xs text-slate-400">-</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td class="px-5 py-4 text-xs text-slate-600 sm:px-6 whitespace-nowrap">
+                                <span class="flex items-center gap-1.5">
+                                    <i data-lucide="calendar" class="h-3.5 w-3.5 text-slate-400"></i>
+                                    {{ project.date|date:"M d, Y" }}
+                                </span>
+                            </td>
+                            <td class="px-5 py-4 text-xs sm:px-6 whitespace-nowrap">
+                                {% if project.url %}
+                                    <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-blue hover:underline font-medium">
+                                        <span>Visit Demo</span>
+                                        <i data-lucide="external-link" class="h-3 w-3"></i>
+                                    </a>
+                                {% else %}
+                                    <span class="text-slate-400">-</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-5 py-4 text-right sm:px-6 whitespace-nowrap">
+                                <div class="flex items-center justify-end gap-2">
+                                    <a href="{% url 'projects:detail' project.slug %}" target="_blank" class="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-blue hover:bg-slate-50 transition" title="Preview project on public site">
+                                        <i data-lucide="eye" class="h-3.5 w-3.5"></i>
+                                        <span>View</span>
+                                    </a>
+                                    <button type="button" onclick="confirmDelete('{{ project.id }}', '{{ project.title|escapejs }}')" class="inline-flex items-center gap-1 rounded-md border border-red-200 bg-red-50 px-2.5 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-100 transition cursor-pointer" title="Delete project">
+                                        <i data-lucide="trash-2" class="h-3.5 w-3.5"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <!-- Clean Empty State -->
+            <div class="px-6 py-16 text-center">
+                <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-blue-50 text-blue border border-blue-100 mb-4">
+                    <i data-lucide="folder-plus" class="h-7 w-7"></i>
+                </div>
+                <h3 class="text-base font-bold text-navy">No projects added yet</h3>
+                <p class="mt-1 text-xs text-slate-500 max-w-sm mx-auto">
+                    Get started by adding your first showcase case study. It will appear on your public website immediately.
+                </p>
+                <div class="mt-5">
+                    <button type="button" onclick="openProjectModal()" class="inline-flex items-center gap-2 rounded-lg bg-blue px-4 py-2 text-xs font-semibold text-white hover:bg-blue-hover transition cursor-pointer">
+                        <i data-lucide="plus" class="h-4 w-4"></i>
+                        Add Your First Project
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- ADD PROJECT MODAL DIALOG (CLEAN & SOLID)   -->
+<!-- ========================================== -->
+<div id="project-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-navy/60 p-4 sm:p-6 md:p-10" aria-modal="true" role="dialog" aria-labelledby="modal-title">
+    <div class="min-h-full flex items-center justify-center py-6">
+        <div class="relative w-full max-w-3xl rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-6 py-4">
+                <div class="flex items-center gap-3">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue text-white">
+                        <i data-lucide="plus-circle" class="h-5 w-5"></i>
+                    </div>
+                    <div>
+                        <h3 id="modal-title" class="text-lg font-bold text-navy">Add New Project</h3>
+                        <p class="text-xs text-slate-500">Provide details, media, and tech stack for your portfolio showcase.</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeProjectModal()" class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-200 hover:text-slate-700 transition" aria-label="Close modal">
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
+
+            <!-- Modal Form -->
+            <form id="add-project-form" action="{% url 'dashboard:projects' %}" method="post" enctype="multipart/form-data" class="p-6 sm:p-8 space-y-5">
+                {% csrf_token %}
+
+                <!-- Non-field / Top Error Banner -->
+                <div id="modal-error-banner" class="hidden rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-700"></div>
+
+                {% if form.non_field_errors %}
+                    <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-700">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <!-- Row 1: Title and Date -->
+                <div class="grid gap-5 sm:grid-cols-2">
+                    <div>
+                        <label for="{{ form.title.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                            Project Title <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.title }}
+                        <div id="error-title" class="text-xs text-red-600 mt-1 {% if not form.title.errors %}hidden{% endif %}">
+                            {{ form.title.errors.0 }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="{{ form.date.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                            Completion Date <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.date }}
+                        <div id="error-date" class="text-xs text-red-600 mt-1 {% if not form.date.errors %}hidden{% endif %}">
+                            {{ form.date.errors.0 }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Technologies and URL -->
+                <div class="grid gap-5 sm:grid-cols-2">
+                    <div>
+                        <label for="{{ form.technologies.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                            Technologies & Tools
+                        </label>
+                        {{ form.technologies }}
+                        <p class="text-[11px] text-slate-400 mt-1">Comma-separated: React, Django, Tailwind CSS, PostgreSQL</p>
+                        <div id="error-technologies" class="text-xs text-red-600 mt-1 {% if not form.technologies.errors %}hidden{% endif %}">
+                            {{ form.technologies.errors.0 }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="{{ form.url.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                            Live Demo / Repo Link
+                        </label>
+                        {{ form.url }}
+                        <p class="text-[11px] text-slate-400 mt-1">e.g. https://myproject.com or GitHub URL</p>
+                        <div id="error-url" class="text-xs text-red-600 mt-1 {% if not form.url.errors %}hidden{% endif %}">
+                            {{ form.url.errors.0 }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Cover Photo Upload -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Cover Photo
+                    </label>
+                    <div id="file-drop-zone" class="border-2 border-dashed border-slate-300 rounded-xl p-5 text-center bg-slate-50 hover:bg-slate-100 hover:border-slate-400 transition cursor-pointer" onclick="document.getElementById('id_cover_photo').click()">
+                        {{ form.cover_photo }}
+                        <div class="flex flex-col items-center justify-center gap-1.5">
+                            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue border border-blue-100">
+                                <i data-lucide="upload-cloud" class="h-5 w-5"></i>
+                            </span>
+                            <div>
+                                <span class="text-xs font-semibold text-blue hover:underline">Choose image file</span>
+                                <span class="text-xs text-slate-500"> or drag and drop</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">PNG, JPG, WEBP, or GIF (max 5MB)</p>
+                            <div id="selected-file-name" class="hidden mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 border border-emerald-200">
+                                <i data-lucide="check-circle" class="h-3.5 w-3.5"></i>
+                                <span id="selected-file-label">filename.png</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="error-cover_photo" class="text-xs text-red-600 mt-1 {% if not form.cover_photo.errors %}hidden{% endif %}">
+                        {{ form.cover_photo.errors.0 }}
+                    </div>
+                </div>
+
+                <!-- Row 4: Description -->
+                <div>
+                    <label for="{{ form.description.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Project Overview / Description <span class="text-red-500">*</span>
+                    </label>
+                    {{ form.description }}
+                    <div id="error-description" class="text-xs text-red-600 mt-1 {% if not form.description.errors %}hidden{% endif %}">
+                        {{ form.description.errors.0 }}
+                    </div>
+                </div>
+
+                <!-- Row 5: Problem & Solution -->
+                <div class="grid gap-5 sm:grid-cols-2">
+                    <div>
+                        <label for="{{ form.problem.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                            The Challenge / Problem <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.problem }}
+                        <div id="error-problem" class="text-xs text-red-600 mt-1 {% if not form.problem.errors %}hidden{% endif %}">
+                            {{ form.problem.errors.0 }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="{{ form.solution.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                            The Solution <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.solution }}
+                        <div id="error-solution" class="text-xs text-red-600 mt-1 {% if not form.solution.errors %}hidden{% endif %}">
+                            {{ form.solution.errors.0 }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="flex items-center justify-end gap-3 border-t border-slate-200 pt-5">
+                    <button type="button" onclick="closeProjectModal()" class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit" id="save-project-btn" class="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-5 py-2 text-xs font-bold text-white hover:bg-blue transition cursor-pointer shadow-xs min-w-[120px]">
+                        <span id="btn-text">Save Project</span>
+                        <span id="btn-spinner" class="hidden items-center gap-1.5">
+                            <i data-lucide="loader-2" class="h-3.5 w-3.5 animate-spin"></i>
+                            Saving...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- DELETE CONFIRMATION MODAL                  -->
+<!-- ========================================== -->
+<div id="delete-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-navy/60 p-4" aria-modal="true" role="dialog">
+    <div class="min-h-full flex items-center justify-center">
+        <div class="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+            <div class="flex items-start gap-4">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 border border-red-200">
+                    <i data-lucide="alert-triangle" class="h-5 w-5"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-navy">Delete Project?</h3>
+                    <p class="mt-1 text-xs text-slate-600 leading-relaxed">
+                        Are you sure you want to remove <span id="delete-project-name" class="font-semibold text-navy"></span>? This action cannot be undone.
+                    </p>
+                </div>
+            </div>
+
+            <form id="delete-form" method="post" action="" class="mt-6 flex justify-end gap-3">
+                {% csrf_token %}
+                <button type="button" onclick="closeDeleteModal()" class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition cursor-pointer">
+                    Cancel
+                </button>
+                <button type="submit" class="rounded-lg bg-red-600 px-4 py-2 text-xs font-bold text-white hover:bg-red-700 transition cursor-pointer">
+                    Delete Project
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('project-modal');
+    const openBtn = document.getElementById('open-project-modal-btn');
+    const form = document.getElementById('add-project-form');
+    const saveBtn = document.getElementById('save-project-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const fileInput = document.getElementById('id_cover_photo');
+    const fileLabel = document.getElementById('selected-file-label');
+    const fileNameContainer = document.getElementById('selected-file-name');
+    const errorBanner = document.getElementById('modal-error-banner');
+
+    function openProjectModal() {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+        const titleInput = document.getElementById('{{ form.title.id_for_label }}');
+        if (titleInput) {
+            setTimeout(() => titleInput.focus(), 100);
+        }
+    }
+
+    function closeProjectModal() {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    if (openBtn) {
+        openBtn.addEventListener('click', openProjectModal);
+    }
+
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            closeProjectModal();
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeProjectModal();
+            closeDeleteModal();
+        }
+    });
+
+    // File input label update on selection
+    if (fileInput) {
+        fileInput.addEventListener('change', function () {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+                fileLabel.textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
+                fileNameContainer.classList.remove('hidden');
+            } else {
+                fileNameContainer.classList.add('hidden');
+            }
+        });
+    }
+
+    // Clear inline errors
+    function clearErrors() {
+        errorBanner.classList.add('hidden');
+        errorBanner.textContent = '';
+        document.querySelectorAll('[id^="error-"]').forEach(function (el) {
+            el.classList.add('hidden');
+            el.textContent = '';
+        });
+    }
+
+    // Form submission with AJAX & fallback
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        clearErrors();
+
+        btnText.classList.add('hidden');
+        btnSpinner.classList.remove('hidden');
+        btnSpinner.classList.add('inline-flex');
+        saveBtn.disabled = true;
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+        })
+        .then(function (response) {
+            return response.json().then(function (data) {
+                return { status: response.status, ok: response.ok, data: data };
+            });
+        })
+        .then(function (result) {
+            if (result.ok && result.data.success) {
+                // Success: reload to show new project
+                window.location.href = result.data.redirect_url || '{% url "dashboard:projects" %}';
+            } else {
+                // Validation error
+                btnText.classList.remove('hidden');
+                btnSpinner.classList.add('hidden');
+                btnSpinner.classList.remove('inline-flex');
+                saveBtn.disabled = false;
+
+                if (result.data.errors) {
+                    for (const [field, messages] of Object.entries(result.data.errors)) {
+                        const errorEl = document.getElementById('error-' + field);
+                        if (errorEl) {
+                            errorEl.textContent = messages.join(' ');
+                            errorEl.classList.remove('hidden');
+                        }
+                    }
+                }
+                errorBanner.textContent = result.data.message || 'Please correct the errors in the form.';
+                errorBanner.classList.remove('hidden');
+                modal.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        })
+        .catch(function (error) {
+            // Fallback: Submit normally if AJAX fails
+            form.submit();
+        });
+    });
+
+    // Delete Confirmation Logic
+    const deleteModal = document.getElementById('delete-modal');
+    const deleteForm = document.getElementById('delete-form');
+    const deleteProjectName = document.getElementById('delete-project-name');
+
+    function confirmDelete(projectId, projectTitle) {
+        deleteForm.action = '/dashboard/projects/' + projectId + '/delete/';
+        deleteProjectName.textContent = '"' + projectTitle + '"';
+        deleteModal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeDeleteModal() {
+        deleteModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    deleteModal.addEventListener('click', function (event) {
+        if (event.target === deleteModal) {
+            closeDeleteModal();
+        }
+    });
+
+    // Reopen modal if server-side validation error occurred on regular POST
+    {% if form.errors %}
+        openProjectModal();
+    {% endif %}
+</script>
+{% endblock %}

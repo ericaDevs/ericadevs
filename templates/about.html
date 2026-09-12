@@ -1,0 +1,665 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Nehemiah Erika Lorot | About Me
+{% endblock %}
+
+{% block content %}
+<style>
+    @keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+    }
+
+    .animate-marquee {
+        animation: marquee 30s linear infinite;
+    }
+
+    .animate-marquee:hover {
+        animation-play-state: paused;
+    }
+
+    /* Custom Animations for About Page */
+    @keyframes marquee {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+        animation: marquee 35s linear infinite;
+        display: flex;
+        width: max-content;
+    }
+    .animate-marquee:hover {
+        animation-play-state: paused;
+    }
+    
+    /* Accessibility: Respect user's motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-marquee { 
+            animation: none; 
+            transform: none; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            width: 100%;
+        }
+        .marquee-container {
+            overflow: visible;
+        }
+    }
+</style>
+<main class="w-full overflow-hidden bg-white font-mont">
+
+    <!-- 1. ABOUT HERO SECTION -->
+    <section class="relative bg-[#CFE4FF] mb-8 py-12 lg:pt-24 lg:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            <!-- Left Side: Content -->
+            <div class="flex flex-col space-y-6">
+                <div class="flex items-center space-x-3">
+                    <span class="text-sm font-semibold tracking-widest text-[#00a10d] uppercase">About Me</span>
+                </div>
+                
+                <h1 class="text-2xl md:text-4xl font-bold text-[#011A38] leading-tight">
+                    Crafting Web Solutions with Code, <span class="text-[#0065E1]">Creativity, </span> and <span class="text-[#0065E1]"> Purpose</span>
+                </h1>
+                
+                <div class="space-y-4 text-base text-gray-600">
+                    <p class="leading-relaxed">
+                        I’m a business-minded technology professional passionate about building practical digital solutions that connect business needs with modern technology. I combine development, design, and business thinking to create websites and systems that are simple, useful, and built to solve real-world problems.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="{% url 'projects:projects' %}" class="inline-flex justify-center items-center px-8 py-4 bg-[#0065E1] text-[white] font-medium hover:bg-[#004394] transition-colors duration-300">
+                        View My Projects &rarr;
+                    </a>
+                    <a href="" class="inline-flex justify-center items-center px-8 py-4 bg-[#01C910] text-[#011A38] font-medium hover:bg-[#00a10d] hover:text-white transition-colors duration-300">
+                        View Resume &rarr;
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right Side: Visual -->
+            <div class="relative w-full aspect-4/5 lg:aspect-square mt-8 lg:mt-0 max-w-lg mx-auto">
+                <!-- Decorative Elements -->
+                <div class="absolute -top-4 -right-4 w-32 h-32 border-t-2 border-r-2 border-[#0065E1] opacity-50 z-0"></div>
+                <div class="absolute -bottom-4 -left-4 w-24 h-24 border-b-2 border-l-2 border-[#01C910] opacity-50 z-0"></div>
+                
+                <!-- Floating tech badges -->
+                <div class="absolute top-12 -left-6 bg-white border border-gray-100 shadow-sm px-4 py-2 flex items-center space-x-2 z-20">
+                    <div class="w-2 h-2 bg-[#0065E1] rounded-full"></div>
+                    <span class="text-xs font-bold tracking-wider text-[#011A38] uppercase">Design</span>
+                </div>
+                <div class="absolute bottom-24 -right-6 bg-white border border-gray-100 shadow-sm px-4 py-2 flex items-center space-x-2 z-20">
+                    <div class="w-2 h-2 bg-[#01C910] rounded-full"></div>
+                    <span class="text-xs font-bold tracking-wider text-[#011A38] uppercase">Build</span>
+                </div>
+
+                <!-- Main Image -->
+                <div class="relative px-12 md:px-2 w-full h-full bg-gray-50 overflow-hidden z-10 border border-gray-200">
+                    <!-- Subtle grid overlay for engineering feel -->
+                    <div class="absolute inset-0 z-10 opacity-10 pointer-events-none" style="background-image: linear-gradient(#011A38 1px, transparent 1px), linear-gradient(90deg, #011A38 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+                    <img src="" alt="Nehemiah Erika Lorot - Software Engineer and Designer" class="w-full h-full object-cover object-center relative z-0 grayscale-20 hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+
+    <!--2. WHO I AM -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div>
+                    <span class="text-xs font-bold tracking-[0.25em] uppercase text-[#0065E1]">
+                        Who I Am
+                    </span>
+                    <h2 class="mt-4 text-3xl md:text-5xl font-bold">
+                        I operate between business and technology.
+                    </h2>
+                </div>
+
+                <div class="space-y-6 text-gray-600 text-base leading-relaxed">
+                    <p>
+                        I am building my career around the intersection of business
+                        understanding and technology execution. My Bachelor of Business
+                        Information Technology education is giving me a foundation in
+                        both organisational thinking and information technology.
+                    </p>
+                    <p>
+                        This perspective influences how I approach development.
+                        I don't want to build software simply because I can write code.
+                        I want to understand the problem behind the software and how
+                        the solution can create value for its users or organisation.
+                    </p>
+                    <p>
+                        My practical development journey has taken me from graphic
+                        design and UI/UX into web development, programming, databases,
+                        backend engineering, business systems, deployment and emerging
+                        technologies such as artificial intelligence and automation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 3. WHY BBIT -->
+    <section class="py-24 bg-[#DEFFE2]">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+                <!-- Left Side -->
+                <div>
+                    <span class="text-xs font-bold tracking-[0.25em] uppercase text-[#01C910]">
+                        Why BBIT
+                    </span>
+
+                    <h2 class="mt-4 text-3xl md:text-5xl font-bold text-[#011A38]">
+                        Learning how business and technology work together.
+                    </h2>
+                </div>
+
+                <!-- Right Side -->
+                <div class="space-y-6 text-gray-600 text-base leading-relaxed">
+
+                    <p>
+                        I chose Bachelor's degree in Business Information Technology because I wanted a course that goes beyond programming and gives me a wider understanding of how organisations work and how technology can support them.
+                    </p>
+
+                    <p>
+                        The course has exposed me to areas such as business processes, management, accounting, economics and information systems while also developing my technical skills in programming, databases and software development.
+                    </p>
+
+                    <p>
+                        For me, this combination makes BBIT a practical foundation for
+                        the kind of work I want to do. It allows me to look at a challenge
+                        from the business side, understand what is needed and then use
+                        technology to help build a solution.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!--4. MY STORY SECTION -->
+    <section class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="max-w-3xl mb-16 lg:mb-24">
+                <span class="text-sm font-semibold tracking-widest text-[#0065E1] uppercase block mb-3">My Journey</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#011A38] mb-6">Every Skill Started With Curiosity.</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    My journey into technology didn't begin with writing complex applications. It started with creativity, curiosity and a desire to understand how ideas could be turned into something people could actually use.
+                </p>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="relative">
+                <!-- Center Line (Desktop) / Left Line (Mobile) -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gray-300 md:-translate-x-1/2"></div>
+
+                <!-- Timeline Items -->
+                <div class="space-y-16 lg:space-y-24">
+                    
+                    <!-- 01 GRAPHIC DESIGN -->
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center">
+                        <div class="md:w-1/2 md:pr-16 pl-0 md:pl-0 w-full mb-8 md:mb-0 text-left md:text-right">
+                            <span class="text-5xl font-bold text-gray-200 block mb-2">01</span>
+                            <h3 class="text-xl font-bold text-[#011A38] mb-3">Where Creativity Started</h3>
+                            <span class="inline-block px-3 py-1 bg-white border border-gray-200 text-xs font-semibold tracking-wide text-[#0065E1] uppercase mb-4">Graphic Design</span>
+                            <p class="text-gray-600 leading-relaxed">
+                                My journey began with graphic design, where I learned how visual communication, composition, typography and branding can transform an idea into something people can see and understand.
+                            </p>
+                        </div>
+                        <div class="hidden md:block absolute left-8 md:left-1/2 w-4 h-4 bg-[#0065E1] border-4 border-gray-50 rounded-full transform -translate-x-1/2 z-10 md:mt-0 mt-8"></div>
+                        <div class="md:w-1/2 pl-0 md:pl-0 w-full">
+                            <div class="aspect-video bg-gray-200 overflow-hidden border border-gray-200 shadow-sm">
+                                <img src="{% static 'images/graphic design.png' %}" alt="Graphic Design Process" class="object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 02 UI/UX DESIGN -->
+                    <div class="relative flex flex-col md:flex-row-reverse items-start md:items-center">
+                        <div class="md:w-1/2 md:pl-16 w-full mb-8 md:mb-0 text-left">
+                            <span class="text-5xl font-bold text-gray-200 block mb-2">02</span>
+                            <h3 class="text-xl font-bold text-[#011A38] mb-3">Learning to Design for People</h3>
+                            <span class="inline-block px-3 py-1 bg-white border border-gray-200 text-xs font-semibold tracking-wide text-[#0065E1] uppercase mb-4">UI/UX Design</span>
+                            <p class="text-gray-600 leading-relaxed">
+                                As I explored design further, I became interested in UI/UX and how interfaces should not only look good but also feel intuitive, useful and easy to navigate.
+                            </p>
+                        </div>
+                        <div class="hidden md:block absolute left-8 md:left-1/2 w-4 h-4 bg-[#0065E1] border-4 border-gray-50 rounded-full transform -translate-x-1/2 z-10 md:mt-0 mt-8"></div>
+                        <div class="md:w-1/2 md:pr-16 pl-0 md:pl-0 w-full">
+                            <div class="aspect-video bg-gray-200 overflow-hidden border border-gray-200 shadow-sm">
+                                <img src="{% static 'images/UIUX design.png' %}" alt="UI and UX Design Process" class="object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 03 BBIT -->
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center">
+                        <div class="md:w-1/2 md:pr-16 pl-0 md:pl-0 w-full mb-8 md:mb-0 text-left md:text-right">
+                            <span class="text-5xl font-bold text-gray-200 block mb-2">03</span>
+                            <h3 class="text-xl font-bold text-[#011A38] mb-3">Choosing Business Information Technology</h3>
+                            <span class="inline-block px-3 py-1 bg-white border border-gray-200 text-xs font-semibold tracking-wide text-[#0065E1] uppercase mb-4">BBIT</span>
+                            <p class="text-gray-600 leading-relaxed">
+                                Choosing a Bachelor of Business Information Technology degree introduced me to the intersection of technology and business. It helped me understand that technology is most valuable when it addresses real organizational and business needs.
+                            </p>
+                        </div>
+                        <div class="hidden md:block absolute left-8 md:left-1/2 w-4 h-4 bg-[#0065E1] border-4 border-gray-50 rounded-full transform -translate-x-1/2 z-10 md:mt-0 mt-8"></div>
+                        <div class="md:w-1/2 md:pl-16 pl-0 w-full">
+                            <div class="aspect-video bg-gray-200 overflow-hidden border border-gray-200 shadow-sm">
+                                <img src="{% static 'images/bbit.png' %}" alt="Business Information Technology Studies" class="object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 04 BUSINESS SYSTEMS -->
+                    <div class="relative flex flex-col md:flex-row-reverse items-start md:items-center">
+                        <div class="md:w-1/2 md:pl-16 w-full mb-8 md:mb-0 text-left">
+                            <span class="text-5xl font-bold text-gray-200 block mb-2">04</span>
+                            <h3 class="text-xl font-bold text-[#011A38] mb-3">Building Solutions for Real Problems</h3>
+                            <span class="inline-block px-3 py-1 bg-white border border-gray-200 text-xs font-semibold tracking-wide text-[#0065E1] uppercase mb-4">Business Systems</span>
+                            <p class="text-gray-600 leading-relaxed">
+                                This led me toward building complete business systems applications designed not simply to display information, but to help businesses manage processes, solve problems and work more efficiently.
+                            </p>
+                        </div>
+                        <div class="hidden md:block absolute left-8 md:left-1/2 w-4 h-4 bg-[#0065E1] border-4 border-gray-50 rounded-full transform -translate-x-1/2 z-10 md:mt-0 mt-8"></div>
+                        <div class="md:w-1/2 md:pr-16 pl-0 md:pl-0 w-full">
+                            <div class="aspect-video bg-gray-200 overflow-hidden border border-gray-200 shadow-sm">
+                                <img src="{% static 'images/solutions.png' %}" alt="Business Digital Systems" class="object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5 TODAY -->
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center">
+                        <div class="md:w-1/2 md:pr-16 pl-0 md:pl-0 w-full mb-8 md:mb-0 text-left md:text-right">
+                            <span class="text-5xl font-bold text-gray-200 block mb-2">05</span>
+                            <h3 class="text-xl font-bold text-[#011A38] mb-3">Designing, Developing and Solving.</h3>
+                            <span class="inline-block px-3 py-1 bg-[#0065E1] text-[white] text-xs font-semibold tracking-wide uppercase mb-4">Today</span>
+                            <p class="text-gray-600 leading-relaxed">
+                                Today, I combine design, development and business thinking to create digital experiences and practical technology solutions. I'm still learning, still building and constantly looking for better ways to turn ideas into useful products.
+                            </p>
+                        </div>
+
+                        <span class="hidden md:flex absolute left-8 md:left-1/2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0065E1] opacity-70"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-[#0065E1]"></span>
+                        </span>
+
+                        <div class="md:w-1/2 md:pl-16 pl-0 w-full">
+                            <div class="aspect-video bg-gray-200 overflow-hidden border border-gray-200 shadow-sm">
+                                <img src="{% static 'images/designing.png' %}" alt="Modern digital solutions and technology" class="">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 5. SKILLS SECTION -->
+    <section class="py-20 lg:py-32 bg-[#DEFFE2] overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+            <span class="text-sm font-semibold tracking-widest text-[#0065E1] uppercase block mb-3">What I Do Best</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-[#011A38] mb-4">My Skills & Capabilities.</h2>
+            <p class="text-base text-gray-600 max-w-2xl leading-relaxed">
+                I work across design and development, allowing me to approach digital products from both the user's perspective and the engineering side.
+            </p>
+        </div>
+
+        <section class="relative overflow-hidden py-8">
+            <!-- Left fade -->
+            <div class="absolute left-0 top-0 z-10 h-full w-24 bg-linear-to-r from-white to-transparent"></div>
+            <!-- Right fade -->
+            <div class="absolute right-0 top-0 z-10 h-full w-24 bg-linear-to-l from-white to-transparent"></div>
+            <!-- Moving track -->
+            <div class="flex w-max animate-marquee gap-12">
+
+                <!-- First set -->
+                <div class="flex items-center gap-12">
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/python.png' %}" class="h-12" alt="Python">
+                        <p class="text-sm text-[#011A38]">Python</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/django.png' %}" class="h-12" alt="Django">
+                        <p class="text-sm text-[#011A38]">Django</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/flask.png' %}" class="h-12" alt="Flask">
+                        <p class="text-sm text-[#011A38]">Flask</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/javascript.png' %}" class="h-12" alt="JavaScript">
+                        <p class="text-sm text-[#011A38]">JavaScript</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/html.png' %}" class="h-12" alt="HTML5">
+                        <p class="text-sm text-[#011A38]">HTML5</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/css3.png' %}" class="h-12" alt="CSS3">
+                        <p class="text-sm text-[#011A38]">CSS3</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/tailwindcss.png' %}" class="h-12" alt="Tailwind CSS">
+                        <p class="text-sm text-[#011A38]">Tailwind CSS</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/mysql.png' %}" class="h-12" alt="MySQL">
+                        <p class="text-sm text-[#011A38]">MySQL</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/postgresql.png' %}" class="h-12" alt="PostgreSQL">
+                        <p class="text-sm text-[#011A38]">PostgreSQL</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/git.png' %}" class="h-12" alt="Git">
+                        <p class="text-sm text-[#011A38]">Git</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/github.png' %}" class="h-12" alt="GitHub">
+                        <p class="text-sm text-[#011A38]">GitHub</p>
+                    </span>
+                </div>
+
+                <!-- Duplicate set for seamless loop -->
+                <div class="flex items-center gap-12">
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/python.png' %}" class="h-12" alt="Python">
+                        <p class="text-sm text-[#011A38]">Python</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/django.png' %}" class="h-12" alt="Django">
+                        <p class="text-sm text-[#011A38]">Django</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/flask.png' %}" class="h-12" alt="Flask">
+                        <p class="text-sm text-[#011A38]">Flask</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/javascript.png' %}" class="h-12" alt="JavaScript">
+                        <p class="text-sm text-[#011A38]">JavaScript</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/html.png' %}" class="h-12" alt="HTML5">
+                        <p class="text-sm text-[#011A38]">HTML5</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/css3.png' %}" class="h-12" alt="CSS3">
+                        <p class="text-sm text-[#011A38]">CSS3</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/tailwindcss.png' %}" class="h-12" alt="Tailwind CSS">
+                        <p class="text-sm text-[#011A38]">Tailwind CSS</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/mysql.png' %}" class="h-12" alt="MySQL">
+                        <p class="text-sm text-[#011A38]">MySQL</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/postgresql.png' %}" class="h-12" alt="PostgreSQL">
+                        <p class="text-sm text-[#011A38]">PostgreSQL</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/git.png' %}" class="h-12" alt="Git">
+                        <p class="text-sm text-[#011A38]">Git</p>
+                    </span>
+                    <span class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'images/github.png' %}" class="h-12" alt="GitHub">
+                        <p class="text-sm text-[#011A38]">GitHub</p>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Skill Categories -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="border border-gray-200 p-8 hover:border-[#0065E1] transition-colors duration-300">
+                    <img src="{% static 'images/design icon.png' %}" class="w-10 h-10 mb-6" alt="design icon">  
+                    <h3 class="text-xl font-bold text-[#011A38] mb-3">Design</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Creating intuitive user experiences and visual interfaces that balance clarity, usability, creativity.</p>
+                </div>
+
+                <div class="border border-gray-200 p-8 hover:border-[#0065E1] transition-colors duration-300">
+                <img src="{% static 'images/software.png' %}" class="w-10 h-10 mb-6" alt="software development icon">
+                    <h3 class="text-xl font-bold text-[#011A38] mb-3">Development</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Building responsive websites and full-stack applications using modern, scalable web development technologies.</p>
+                </div>
+
+                <div class="border border-gray-200 p-8 hover:border-[#0065E1] transition-colors duration-300">
+                    <img src="{% static 'images/system analysis.png' %}" class="w-10 h-10 mb-6" alt="system analysis icon">
+                    <h3 class="text-xl font-bold text-[#011A38] mb-3">System Analysis</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Analyzing business processes and designing efficient systems that address organizational requirements.</p>
+                </div>
+
+
+                <div class="border border-gray-200 p-8 hover:border-[#0065E1] transition-colors duration-300">
+                    <img src="{% static 'images/business analysis.png' %}" class="w-10 h-10 mb-6" alt="business analysis icon">
+                    <h3 class="text-xl font-bold text-[#011A38] mb-3">Business Analysis</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Bridging business needs with technology to develop practical solutions that improve efficiency.</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 6. MISSION & VISION SECTION -->
+    <section class="relative overflow-hidden py-24">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                
+                <!-- Mission -->
+                <div class="text-white space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-px bg-[#0065E1]"></div>
+                        <span class="text-xs font-semibold tracking-widest text-[#0065E1] uppercase">My Mission</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold leading-tight">Build Technology That <span class="text-[#0065E1]">Makes a Difference.</span></h2>
+                    <p class="text-base leading-relaxed font-light">
+                        My mission is to combine creativity, technology and business understanding to build digital solutions that solve practical problems, simplify experiences and create meaningful value for the people who use them.
+                    </p>
+                </div>
+
+                <!-- Vision -->
+                <div class="text-white space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-px bg-[#01C910]"></div>
+                        <span class="text-xs font-semibold tracking-widest text-[#01C910] uppercase">My Vision</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold leading-tight">To Keep Building, Learning and <span class="text-[#01C910]">Creating Impact.</span></h2>
+                    <p class="text-base leading-relaxed font-light">
+                        My vision is to grow into a highly capable technology professional who contributes to digital transformation by designing and building innovative, reliable and practical solutions.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 7. RESUME CTA SECTION -->
+    <section id="resume" class="py-20 bg-[#CFE4FF]">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white border border-gray-200 shadow-sm flex flex-col md:flex-row items-center justify-between p-8 md:p-12">
+                
+                <div class="md:w-2/3 mb-8 md:mb-0 text-center md:text-left">
+                    <h2 class="text-2xl md:text-3xl font-bold text-[#011A38] mb-4">Want to Know More About My Journey?</h2>
+                    <p class="text-gray-600 mb-8 max-w-lg mx-auto md:mx-0">
+                        Explore my education, skills, projects and professional development in more detail through my resume.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="" class="inline-flex justify-center items-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold hover:bg-[#011A38] hover:text-[#FFFFFF] transition-colors duration-300">
+                            Download Resume &darr;
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden md:w-1/3 md:flex justify-center md:justify-end">
+                    <!-- Subtle abstract document illustration -->
+                    <div class="relative w-32 h-40 bg-white border-2 border-gray-200 shadow-lg transform rotate-3">
+                        <div class="absolute top-0 left-0 w-full h-2 bg-[#0065E1]"></div>
+                        <div class="px-4 py-6 space-y-3">
+                            <div class="h-2 bg-gray-200 w-3/4"></div>
+                            <div class="h-2 bg-gray-200 w-full"></div>
+                            <div class="h-2 bg-gray-200 w-5/6"></div>
+                            <div class="mt-4 h-2 bg-[#01C910] w-1/2 opacity-50"></div>
+                            <div class="h-2 bg-gray-200 w-full"></div>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-gray-50 border border-gray-200 -z-10 transform -rotate-6"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- 8. WHY WORK WITH ME SECTION -->
+    <section class="py-20 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+                <span class="text-sm font-semibold tracking-widest text-[#0065E1] uppercase block mb-3">Why Work With Me</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#011A38] mb-4">More Than a Developer. A Problem Solver.</h2>
+                <p class="text-lg text-gray-600">
+                    I bring together creativity, technical skills and business thinking to approach projects from more than one perspective.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- 01 -->
+                <div class="group border border-gray-100 p-8 hover:shadow-md transition-all duration-300 bg-[#CFE4FF] text-left">
+                    <h3 class="text-lg font-bold text-[#011A38] mb-3">Design & Development</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Because I understand both design and development, I can think about how a product should look, feel and function.
+                    </p>
+                </div>
+
+                <!-- 02 -->
+                <div class="group border border-gray-100 p-8 hover:shadow-md transition-all duration-300 bg-[#DEFFE2] text-left">
+                    <h3 class="text-lg font-bold text-[#011A38] mb-3">Problem First</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        I focus on understanding the problem before choosing the technology, helping ensure that the solution actually addresses the user's needs.
+                    </p>
+                </div>
+
+                <!-- 03 -->
+                <div class="group border border-gray-100 p-8 hover:shadow-md transition-all duration-300 bg-[#CFE4FF] text-left">
+                    <h3 class="text-lg font-bold text-[#011A38] mb-3">Continuous Learning</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Technology keeps evolving, and so do I. I continuously learn, experiment and improve my skills through real projects.
+                    </p>
+                </div>
+
+                <!-- 04 -->
+                <div class="group border border-gray-100 p-8 hover:shadow-md transition-all duration-300 bg-[#DEFFE2] text-left">
+                    <h3 class="text-lg font-bold text-[#011A38] mb-3">Commitment to Quality</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        I care about clean interfaces, maintainable code, responsive experiences and solutions that are practical and reliable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 9. PROFESSIONAL DIRECTION -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-xs font-bold tracking-[0.25em] uppercase text-[#0065E1]">
+                        Where I'm Going
+                    </span>
+                    <h2 class="mt-4 text-3xl md:text-5xl font-bold">
+                        Building towards Business Technology Strategy.
+                    </h2>
+                    <p class="mt-6 text-base text-gray-600 leading-relaxed">
+                        My long-term direction is to grow into a professional who
+                        can move comfortably between business analysis, software
+                        engineering, data, artificial intelligence and digital
+                        transformation.
+                    </p>
+                    <p class="mt-5 text-base text-gray-600 leading-relaxed">
+                        I want to understand the challenge, design the strategy,
+                        build the technology and help turn digital investment
+                        into meaningful business outcomes.
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center gap-5 p-5 bg-white border border-gray-200">
+                        <span class="w-10 h-10 flex items-center justify-center bg-[#0065E1] text-white font-bold">01</span>
+                        <span class="font-semibold">Business Analysis</span>
+                    </div>
+                    <div class="flex items-center gap-5 p-5 bg-white border border-gray-200">
+                        <span class="w-10 h-10 flex items-center justify-center bg-[#01C910] text-[#011A38] font-bold">02</span>
+                        <span class="font-semibold">Systems Analysis & Design</span>
+                    </div>
+                    <div class="flex items-center gap-5 p-5 bg-white border border-gray-200">
+                        <span class="w-10 h-10 flex items-center justify-center bg-[#0065E1] text-white font-bold">03</span>
+                        <span class="font-semibold">Software Engineering</span>
+                    </div>
+                    <div class="flex items-center gap-5 p-5 bg-white border border-gray-200">
+                        <span class="w-10 h-10 flex items-center justify-center bg-[#01C910] text-[#011A38] font-bold">04</span>
+                        <span class="font-semibold">Data & Artificial Intelligence</span>
+                    </div>
+                    <div class="flex items-center gap-5 p-5 bg-white border border-gray-200">
+                        <span class="w-10 h-10 flex items-center justify-center bg-[#0065E1] text-white font-bold">05</span>
+                        <span class="font-semibold">Digital Transformation & Strategy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 10. FINAL ABOUT CTA -->
+    <section class="py-24 bg-[#DEFFE2] text-center">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="text-sm font-semibold tracking-widest text-[#01C910] uppercase block mb-3">Let's Build Something</span>
+            <h2 class="text-4xl md:text-5xl font-bold text-[#011A38] mb-6">Have an Idea Worth Building?</h2>
+            <p class="text-lg text-gray-600 mb-10 max-w-xl mx-auto">
+                Whether you need a website, a digital experience or a custom solution, I'd love to hear what you're working on.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'contacts:contacts' %}" class="inline-flex justify-center items-center px-8 py-4 bg-[#0065E1] text-[white] font-semibold hover:bg-blue-700 transition-colors duration-300">
+                    Start a Conversation &rarr;
+                </a>
+                <a href="{% url 'projects:projects' %}" class="inline-flex justify-center items-center px-8 py-4 bg-[#01C910] text-[#011A38] font-semibold hover:bg-[#01C910]/80 transition-colors duration-300">
+                    View My Projects &rarr;
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+{% endblock %}

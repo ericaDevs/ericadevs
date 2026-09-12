@@ -1,0 +1,323 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Nehemiah Erika Lorot | Business Technology Strategist & Software Developer
+{% endblock %}
+
+{% block content %}
+
+<main class="font-mont">
+    <!-- Hero section -->
+    <section class="h-[92%] relative overflow-hidden py-20 px-6 md:px-12" style="background-image: linear-gradient(rgba(13,13,13,0.7), rgba(13,13,13,0.45)), url('https://i.pinimg.com/1200x/72/e7/c4/72e7c45fe83fec3e1bcb4b82f4fd118e.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="relative max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="max-w-3xl">
+                <h1 class="text-3xl md:text-5xl font-bold text-[#01C910] tracking-wide mb-2">Hello</h1>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-[#FFFFFF] leading-[1.05] tracking-normal">
+                    I'm a Business & Technology Strategist
+                </h1>
+                <p class="mt-5 mb-4 max-w-2xl text-base leading-7 text-[#FFFFFF]">
+                    My name Nehemiah Erika Lorot, a Bachelor of Business Information Technology student developing expertise across business and technology. I turn real business needs into practical digital solutions by combining web development, data, and business thinking.
+                </p>
+                <div class="flex flex-col md:flex-row items-left gap-4 justify-start">
+                    <a href="{% url 'projects:projects' %}"
+                        class="inline-flex items-center justify-center px-7 py-4 bg-[#0065E1] text-[#ffffff] font-semibold hover:bg-[#01C910] hover:text-[#011A38] transition-all duration-300">
+                        Explore My Work
+                    </a>
+                    <a href="{% url 'contacts:contacts' %}"
+                        class="inline-flex items-center justify-center px-7 py-4 text-[#011A38] font-semibold bg-[#01C910] hover:bg-[#0065E1] hover:text-[#FFFFFF] transition-all duration-300">
+                        View my CV
+                    </a>
+                </div>
+
+                <div class="flex flex-row items-center justify-start gap-6 mt-8">
+                    <div class="flex flex-row gap-2 items-center justify-center">
+                        <i data-lucide="briefcase-business" class="w-6 h-6 text-[#0065E1]"></i>
+                        <p class="text-base text-[white]">Business</p>
+                    </div>
+
+                    <div class="flex flex-row gap-2 items-center justify-center">
+                        <i data-lucide="cpu" class="w-6 h-6 text-[#01C910]"></i>
+                        <p class="text-base text-[white]">Technology</p>
+                    </div>
+
+                    <div class="flex flex-row gap-2 items-center justify-center">
+                        <i data-lucide="trending-up" class="w-6 h-6 text-[#0065E1]"></i>
+                        <p class="text-base text-[white]">Strategy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>        
+
+
+    <!-- ABOUT ME -->
+    <section class="py-20 bg-[#DEFFE2]">
+        <div class="max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center mx-auto px-6 md:px-12">
+            <div class="max-w-3xl">
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-[#0065E1]">
+                    My Story
+                </span>
+                <h2 class="mt-4 text-3xl md:text-5xl font-bold leading-tight">
+                    About Me
+                </h2>
+                <p class="mt-6 text-base text-gray-600 leading-relaxed">
+                    I’m Nehemiah Erika Lorot, a business-minded technology professional combining software development, UI/UX design, and business analysis to build practical digital solutions. With a foundation in Business Information Technology and experience across design, web development, databases, and business systems, I focus on understanding the problem first, then turning ideas into intuitive, reliable, and valuable digital experiences.
+                </p>
+                <a href="{% url 'about' %}" class="inline-block mt-6 px-6 py-3 bg-[#0065E1] text-[white] font-bold rounded-lg hover:bg-[#004a99] transition-colors duration-300">
+                    Learn more about me
+                </a>
+            </div>
+
+            <div class="flex items-center justify-center w-full">
+                <img src="{% static 'images/skills-collection.svg' %}" alt="Programming languages and tools" class="w-full max-w-xl h-auto object-contain" style="background: transparent;">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- WHAT I DO -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="max-w-2xl mb-16">
+                <h2 class="mt-4 text-3xl md:text-5xl font-bold">
+                    What I Do
+                </h2>
+
+                <p class="mt-6 text-gray-600 text-base leading-relaxed">
+                    I am developing capabilities across business, information systems
+                    and software engineering to approach digital projects from both
+                    strategic and technical perspectives.
+                </p>
+            </div>
+
+
+            <div class="grid text-base md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Business Analysis -->
+                <div class="bg-white p-8 border border-gray-200 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                    <i data-lucide="chart-no-axes-combined" class="w-9 h-9 text-[#0065E1] mt-6 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">Business Analysis</h3>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Understanding business processes, requirements and operational
+                        challenges to identify opportunities for technology-driven improvement.
+                    </p>
+                </div>
+
+                <!-- Web Development -->
+                <div class="bg-white p-8 border border-gray-200 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                    <i data-lucide="code-2" class="w-9 h-9 text-[#01C910] mt-6 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">Web development</h3>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Designing and developing websites and web applications that
+                        are functional, user-friendly and visually appealing.
+                    </p>
+                </div>
+
+                <!-- Graphic Design -->
+                <div class="bg-white p-8 border border-gray-200 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                    <i data-lucide="image" class="w-9 h-9 text-[#0065E1] mt-6 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">Graphic Design</h3>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Creating visual concepts and designs that communicate ideas
+                        and enhance the user experience.
+                    </p>
+                </div>
+
+                <!-- Brand Identity Design -->
+                <div class="bg-white p-8 border border-gray-200 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                    <i data-lucide="palette" class="w-9 h-9 text-[#01C910] mt-6 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">Brand Identity Design</h3>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Developing visual identities and brand strategies that
+                        communicate a company's values, mission and personality.
+                    </p>
+                </div>
+
+                <!-- Digital Strategy -->
+                <div class="bg-white p-8 border border-gray-200 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                    <i data-lucide="workflow"
+                       class="w-9 h-9 text-[#0065E1] mt-6 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">Digital Strategy</h3>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Connecting technology choices with business objectives,
+                        process improvement and digital transformation.
+                    </p>
+                </div>
+
+                <!-- Product Design -->
+                <div class="bg-white p-8 border border-gray-200 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                    <i data-lucide="pen-tool" class="w-9 h-9 text-[#01C910] mt-6 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">UI/UX & Design</h3>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Designing clear interfaces and digital experiences that
+                        balance usability, communication and visual quality.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- HOW I SOLVE PROBLEMS -->
+    <section class="py-24 bg-[#CFE4FF]">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="max-w-2xl mb-16">
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-[#01C910]">
+                    My Approach
+                </span>
+                <h2 class="mt-4 text-3xl text-[#011A38] md:text-5xl font-bold">
+                    How I turn ideas and business needs into practical digital solutions.
+                </h2>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-5 md:gap-px bg-white/10">
+                <div class="p-6 border-l-2 border-[#395d8a71]">
+                    <span class="text-2xl font-bold text-[#01C910]">01</span>
+                    <h3 class="font-bold text-xl text-[#011A38] mt-4 mb-3">I Understand</h3>
+                    <p class="text-sm leading-relaxed">
+                        Identify the problem, users, processes and objectives.
+                    </p>
+                </div>
+
+                <div class="p-6 border-l-2 border-[#395d8a71]">
+                    <span class="text-2xl font-bold text-[#01C910]">02</span>
+                    <h3 class="font-bold text-xl text-[#011A38] mt-4 mb-3">I Analyse</h3>
+                    <p class="text-sm leading-relaxed">
+                        Translate needs into requirements and opportunities.
+                    </p>
+                </div>
+
+                <div class="p-6 border-l-2 border-[#395d8a71]">
+                    <span class="text-2xl font-bold text-[#01C910]">03</span>
+                    <h3 class="font-bold text-xl text-[#011A38] mt-4 mb-3">I Design</h3>
+                    <p class="text-sm leading-relaxed">
+                        Plan the system structure, database and workflow.
+                    </p>
+                </div>
+
+                <div class="p-6 border-l-2 border-[#395d8a71]">
+                    <span class="text-2xl font-bold text-[#01C910]">04</span>
+                    <h3 class="font-bold text-xl text-[#011A38] mt-4 mb-3">I Build</h3>
+                    <p class="text-sm leading-relaxed">
+                        Develop, integrate, test and deploy the solution.
+                    </p>
+                </div>
+
+                <div class="p-6 border-l-2 border-[#395d8a71]">
+                    <span class="text-2xl font-bold text-[#01C910]">05</span>
+                    <h3 class="font-bold text-xl text-[#011A38] mt-4 mb-3">I Improve</h3>
+                    <p class="text-sm leading-relaxed">
+                        Use feedback and data to improve the solution.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- SELECTED PROJECTS -->
+    <section id="projects" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+
+                <div class="max-w-2xl">
+                    <span class="text-xs font-bold tracking-[0.25em] uppercase text-[#0065E1]">
+                        My Work
+                    </span>
+                    <h2 class="mt-4 text-2xl md:text-5xl font-bold">
+                        A showcase of what I’ve built, designed, and brought to life.
+                    </h2>
+                    <p class="mt-5 text-gray-600 text-base">
+                        Explore a selection of websites, digital systems, and creative projects that showcase how I combine business thinking, design, and technology to solve real-world problems.
+                    </p>
+                </div>
+
+                <a href="{% url 'projects:projects' %}"
+                   class="inline-flex items-center font-semibold text-[#011A38] hover:text-[#0065E1] transition-colors">
+                    View All Projects
+                    <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                </a>
+
+            </div>
+
+
+            {% if projects %}
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    {% for project in projects|slice:":3" %}
+                        <a href="{% url 'projects:detail' project.slug %}"
+                        class="group block border border-gray-200 bg-white overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+
+                            <div class="aspect-video overflow-hidden bg-gray-100">
+                                {% if project.cover_photo %}
+                                    <img src="{{ project.cover_photo.url }}"
+                                    alt="{{ project.title }}"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
+                                {% else %}
+                                    <div class="w-full h-full flex items-center justify-center bg-gray-100">
+                                        <i data-lucide="image" class="w-12 h-12 text-gray-300"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="p-7">
+                                <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#0065E1] mb-3">
+                                    <span>Case Study</span>
+                                    <span class="w-1 h-1 rounded-full bg-[#01C910]"></span>
+                                    <span>Digital Solution</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3 group-hover:text-[#0065E1] transition-colors">
+                                    {{ project.title }}
+                                </h3>
+                                <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                                    {{ project.description }}
+                                </p>
+                                <div class="mt-6 flex items-center font-semibold text-sm">
+                                    Explore Case Study
+                                    <i data-lucide="arrow-up-right"
+                                    class="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                                </div>
+
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="border border-gray-200 py-16 text-center">
+                    <i data-lucide="folder-open" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
+                    <p class="text-gray-500">
+                        New work is currently being developed.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+
+    <!-- CTA SECTION -->
+    <section>
+        <div class="bg-[#DEFFE2] rounded-lg p-8 md:p-12 text-center">
+            <h2 class="text-2xl md:text-3xl font-semibold text-[#011A38] mb-6">
+                Let's work together to turn your ideas into practical digital solutions.
+            </h2>
+            <a href="{% url 'contacts:contacts' %}"
+                class="inline-block px-8 py-4 bg-[#01C910] text-[#011A38] font-semibold rounded-lg hover:bg-[#004a99] hover:text-[white] transition-colors duration-300">
+                Get in Touch
+            </a>
+        </div>
+    </section>
+</main>
+
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+{% endblock %}

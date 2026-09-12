@@ -1,0 +1,229 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+Erika Lorot | Contact Me
+{% endblock %}
+
+{% block content %}
+<main class="font-mont bg-white text-[#011A38]">
+
+    <!-- MESSAGE NOTIFICATION -->
+    {% if messages %}
+        <div class="fixed right-4 top-24 z-50 w-[calc(100%-2rem)] max-w-sm space-y-3 sm:right-6" aria-live="polite" aria-atomic="true">
+            {% for message in messages %}
+                <div class="flex items-center justify-evenly gap-3 rounded-2xl border bg-[#CFE4FF] px-6 py-4 shadow-lg shadow-[#011A38]/10 {% if 'success' in message.tags %}border-[#01C910]/30{% else %}border-[#0065E1]/25{% endif %}">
+                    <div class="mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center rounded-full {% if 'success' in message.tags %} bg-[#CFE4FF] text-[#0065E1] {% else %} bg-[#DEFFE2] text-[#01C910] {% endif %}">
+                        <i data-lucide="{% if 'success' in message.tags %}check{% else %}info{% endif %}" class="h-6 w-6"></i>
+                    </div>
+                    <p class="flex-1 pt-1 text-sm font-semibold leading-5 text-[#011A38]">{{ message }}</p>
+                    <button type="button" class="rounded-md p-1 text-[#011A38]/45 transition hover:bg-[#CFE4FF] hover:text-[#011A38]" aria-label="Dismiss notification" data-dismiss-message>
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+
+
+
+    <!-- HERO SECTION -->
+    <section class="bg-[#DEFFE2]">
+        <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-24">
+            <div class="grid items-end gap-8 lg:grid-cols-[1.5fr_0.85fr]">
+                <div class="max-w-3xl">
+                    <div class="mb-6 flex items-center gap-3">
+                        <span class="relative flex h-3 w-3">
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#01C910] opacity-60"></span>
+                            <span class="relative inline-flex h-3 w-3 rounded-full bg-[#01C910]"></span>
+                        </span>
+                        <p class="text-sm font-semibold uppercase tracking-[0.2em]">Open to opportunities</p>
+                    </div>
+
+                    <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[#01C910]">Get in touch</p>
+                    <h1 class="mt-5 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                        Let’s start a
+                        <span class="text-[#01C910]">conversation.</span>
+                    </h1>
+                    <p class="mt-6 max-w-2xl text-base leading-8 text-[#011A38]/80">
+                        Whether you have a project in mind, a job opportunity, or a collaboration idea,
+                        I’d love to hear from you and explore how we can build something meaningful together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTACT INFO -->
+    <section class="py-20">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-start">
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#0065E1]">Contact information</p>
+                    <h2 class="mt-4 text-3xl font-bold tracking-tight text-[#011A38]">
+                        I’m always open to meaningful opportunities.
+                    </h2>
+                    <p class="mt-5 max-w-xl text-base leading-7 text-[#011A38]/75">
+                        If you have a business challenge, a project idea, or a role that fits my background,
+                        feel free to reach out. I’m happy to connect and explore what is possible.
+                    </p>
+
+                    <div class="mt-10 space-y-5">
+                        <div class="flex items-start gap-4 rounded-2xl border border-[#0065E1]/10 bg-[#DEFFE2] p-4">
+                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#01C910] text-white">
+                                <i data-lucide="phone" class="h-5 w-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#0065E1]">Phone</p>
+                                <p class="mt-1 font-semibold text-[#011A38]">+254 7460 80121</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 rounded-2xl border border-[#0065E1]/10 bg-[#DEFFE2] p-4">
+                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#01C910] text-[#011A38]">
+                                <i data-lucide="mail" class="h-5 w-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#0065E1]">Email</p>
+                                <p class="mt-1 font-semibold text-[#011A38]">erikalorot23@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 rounded-2xl border border-[#0065E1]/10 bg-[#DEFFE2] p-4">
+                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#01C910] text-white">
+                                <i data-lucide="map-pin" class="h-5 w-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#0065E1]">Location</p>
+                                <p class="mt-1 font-semibold text-[#011A38]">Naivasha, Kenya</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex items-center gap-3">
+                        <a href="https://www.facebook.com/share/19WLnBT6RE/" aria-label="Facebook" class="flex h-11 w-11 items-center justify-center rounded-full border border-[#0065E1]/20 bg-[#CFE4FF] transition hover:-translate-y-0.5">
+                            <img src="{% static 'images/facebook.png' %}" alt="Facebook" class="h-5 w-5 object-contain">
+                        </a>
+                        <a href="https://github.com/ericaDevs/" aria-label="GitHub" class="flex h-11 w-11 items-center justify-center rounded-full border border-[#0065E1]/20 bg-[#CFE4FF] transition hover:-translate-y-0.5">
+                            <img src="{% static 'images/github.png' %}" alt="GitHub" class="h-5 w-5 object-contain">
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="flex h-11 w-11 items-center justify-center rounded-full border border-[#0065E1]/20 bg-[#CFE4FF] transition hover:-translate-y-0.5">
+                            <img src="{% static 'images/linkedin.png' %}" alt="LinkedIn" class="h-5 w-5 object-contain">
+                        </a>
+                        <a href="#" aria-label="Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-[#0065E1]/20 bg-[#CFE4FF] transition hover:-translate-y-0.5">
+                            <img src="{% static 'images/instagram.png' %}" alt="Instagram" class="h-5 w-5 object-contain">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="rounded-md border border-[#0065E1]/10 bg-[#CFE4FF] p-6 shadow-sm">
+                    <div class="mb-6">
+                        <p class="text-sm font-bold uppercase tracking-[0.2em] text-[#0065E1]">Quick message</p>
+                        <h3 class="mt-3 text-2xl font-bold text-[#011A38]">Tell me what you're working on.</h3>
+                    </div>
+
+                    <form method="POST" action="{% url 'contacts:contacts' %}" class="space-y-5">
+                        {% csrf_token %}
+
+                        <div>
+                            <label for="name" class="mb-2 block text-sm font-semibold text-[#011A38]">Your Name</label>
+                            {% render_field form.full_name class="w-full rounded-xl border border-[#0065E1]/20 px-4 py-3 text-sm text-[#011A38] outline-none transition placeholder:text-[#011A38]/55 focus:border-[#0065E1] focus:ring-2 focus:ring-[#0065E1]/15" id="name" required="required" placeholder="e.g. Erika Lorot" %}
+                            {% if form.full_name.errors %}
+                                <p>{{ form.full_name.errors.0 }}</p>
+                            {% endif %}
+                            
+                        </div>
+
+                        <div>
+                            <label for="email" class="mb-2 block text-sm font-semibold text-[#011A38]">Email Address</label>
+                            {% render_field form.email class="w-full rounded-xl border border-[#0065E1]/20 px-4 py-3 text-sm text-[#011A38] outline-none transition placeholder:text-[#011A38]/55 focus:border-[#0065E1] focus:ring-2 focus:ring-[#0065E1]/15" id="email" required="required" placeholder="e.g. erikalorot@gmail.com" %}
+                            {% if form.email.errors %}
+                                <p>{{ form.email.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <label for="subject" class="mb-2 block text-sm font-semibold text-[#011A38]">Subject</label>
+                            {% render_field form.subject class="w-full rounded-xl border border-[#0065E1]/20 px-4 py-3 text-sm text-[#011A38] outline-none transition placeholder:text-[#011A38]/55 focus:border-[#0065E1] focus:ring-2 focus:ring-[#0065E1]/15" id="subject" required="required" placeholder="e.g. Project / Job Opportunity / Collaboration" %}
+                            {% if form.subject.errors %}
+                                <p>{{ form.subject.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <label for="message" class="mb-2 block text-sm font-semibold text-[#011A38]">Message</label>
+                            {% render_field form.message class="w-full resize-none rounded-xl border border-[#0065E1]/20 px-4 py-3 text-sm text-[#011A38] outline-none transition placeholder:text-[#011A38]/55 focus:border-[#0065E1] focus:ring-2 focus:ring-[#0065E1]/15" id="message" rows="5" required="required" placeholder="Tell me a little about your project, opportunity or idea..." %}
+                            {% if form.message.errors %}
+                                <p>{{ form.message.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#011A38] px-6 py-3.5 text-sm font-bold text-[white] hover:bg-[#001127] cursor-pointer transition">
+                            Send Message
+                            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- DISCUSSION OPTIONS -->
+    <section class="mb-20">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mb-12 max-w-3xl">
+                <p class="text-sm font-bold uppercase tracking-[0.2em] text-[#0065E1]">How I can help</p>
+                <h2 class="mt-4 text-3xl font-bold tracking-tight text-[#011A38] sm:text-4xl">
+                    Let’s build solutions that create real value.
+                </h2>
+                <p class="mt-4 text-base leading-7 text-[#011A38]/75">
+                    Whether you need a website, a digital product, a business-focused system, or a collaborative partnership,
+                    I can help turn your ideas into practical, well-designed technology outcomes.
+                </p>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+                <div class="rounded-2xl border border-[#0065E1]/10 bg-[#CFE4FF] p-7">
+                    <i data-lucide="briefcase-business" class="h-6 w-6 text-[#0065E1]"></i>
+                    <h3 class="mt-5 text-xl font-bold text-[#011A38]">Employment</h3>
+                    <p class="mt-3 text-sm leading-6 text-[#011A38]/70">
+                        Software development, business technology, and systems analysis opportunities.
+                    </p>
+                </div>
+
+                <div class="rounded-2xl border border-[#0065E1]/10 bg-[#DEFFE2] p-7">
+                    <i data-lucide="rocket" class="h-6 w-6 text-[#01C910]"></i>
+                    <h3 class="mt-5 text-xl font-bold text-[#011A38]">Projects</h3>
+                    <p class="mt-3 text-sm leading-6 text-[#011A38]/70">
+                        Websites, digital products, and practical solutions for real-world needs.
+                    </p>
+                </div>
+
+                <div class="rounded-2xl border border-[#0065E1]/10 bg-[#CFE4FF] p-7">
+                    <i data-lucide="users" class="h-6 w-6 text-[#0065E1]"></i>
+                    <h3 class="mt-5 text-xl font-bold text-[#011A38]">Collaboration</h3>
+                    <p class="mt-3 text-sm leading-6 text-[#011A38]/70">
+                        Partnerships and creative work to build something meaningful together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        document.querySelectorAll('[data-dismiss-message]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                button.closest('[aria-live="polite"] > div').remove();
+            });
+        });
+    </script>
+</main>
+{% endblock %}

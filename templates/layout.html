@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            My Portfolio
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<nav class="font-mont sticky w-full top-0 z-50 bg-[#011A38] shadow-sm transition-all duration-300" aria-label="Main Navigation">
+
+    {% url 'home' as home_url %}
+    {% url 'about' as about_url %}
+    {% url 'services' as services_url %}
+    {% url 'projects:projects' as projects_url %}
+    {% url 'contacts:contacts' as contacts_url %}
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <!-- Logo -->
+            <div class="shrink-0 flex items-center">
+                <a href="{{ home_url }}" class="text-[white] font-bold text-2xl transition-colors">
+                    erica<span class="text-[#01C910]">Devs</span><span class="text-[white]">.</span>
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="{{ home_url }}" class="hover:text-[#01C910] transition-colors {% if request.path == home_url %}text-[#01C910] font-semibold {% else %} %} text-[white] font-medium text-sm {% endif %}">Home</a>
+
+                <a href="{{ about_url }}" class="hover:text-[#01C910] transition-colors {% if request.path == about_url %}text-[#01C910] font-semibold {% else %} %} text-[white] font-medium text-sm {% endif %}">About Me</a>
+
+                <a href="{{ projects_url }}" class="hover:text-[#01C910] transition-colors {% if request.path == projects_url %}text-[#01C910] font-semibold {% else %} %} text-[white] font-medium text-sm {% endif %}">Projects</a>
+
+                <a href="{{ services_url }}" class="hover:text-[#01C910] transition-colors {% if request.path == services_url %}text-[#01C910] font-semibold {% else %} %} text-[white] font-medium text-sm {% endif %}">Services</a>
+
+                <a href="{{ contacts_url }}" class="hover:text-[#01C910] transition-colors {% if request.path == contacts_url %}text-[#01C910] font-semibold {% else %} %} text-[white] font-medium text-sm {% endif %}">Contact Me</a>
+
+                <a href="{{ contacts_url }}" class="ml-4 px-6 py-2.5 bg-[#0065E1] text-[white] text-sm font-medium hover:bg-[#01C910] hover:text-[#011A38] transition-all duration-300">
+                    Let's Work Together
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" type="button" class="text-[white] hover:text-gray-300 focus:outline-none p-2" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation">
+                    <i data-lucide="menu" class="h-6 w-6"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu" class="hidden md:hidden absolute left-0 right-0 top-full bg-[#011A38] border-t border-gray-700 shadow-xl">
+        <div class="px-4 pt-2 pb-6 space-y-1">
+            <a href="{{ home_url }}" class="block px-3 py-3 text-[white] font-medium hover:bg-gray-800 rounded-md transition-colors">Home</a>
+            <a href="{{ about_url }}" class="block px-3 py-3 text-[white] font-medium hover:bg-gray-800 rounded-md transition-colors">About Me</a>
+            <a href="{{ projects_url }}" class="block px-3 py-3 text-[white] font-medium hover:bg-gray-800 rounded-md transition-colors">Projects</a>
+            <a href="{{ services_url }}" class="block px-3 py-3 text-[white] font-medium hover:bg-gray-800 rounded-md transition-colors">Services</a>
+            <a href="{{ contacts_url }}" class="block px-3 py-3 text-[white] font-medium hover:bg-gray-800 rounded-md transition-colors">Contact</a>
+            <a href="{{ contacts_url }}" class="block w-full text-center mt-4 px-6 py-3 bg-[#0065E1] text-[white] font-medium hover:bg-[#01C910] hover:text-[#011A38] transition-colors rounded-md">
+                Let's Work Together
+            </a>
+        </div>
+    </div>
+</nav>
+
+{% comment %} WhatsApp Icon {% endcomment %}
+<div class="fixed bottom-12 right-12 z-50">
+    <a href="https://wa.me/254746080121" target="_blank" rel="noopener noreferrer" class="relative group flex items-center justify-center w-12 h-12" aria-label="Chat on WhatsApp">
+        <span class="whatsapp-outline-ripple absolute -inset-1.5 rounded-full border-2 border-[#25D366] pointer-events-none"></span>
+        <span class="whatsapp-outline-pulse absolute -inset-1 rounded-full border-2 border-[#25D366] pointer-events-none"></span>
+        <img src="{% static 'images/whatsapp.png' %}" alt="WhatsApp" class="relative z-10 h-12 w-12 cursor-pointer transition-transform duration-300 group-hover:scale-110 drop-shadow-md">
+    </a>
+</div>
+
+{% block content %}
+
+{% endblock %}
+
+<footer class="bg-[#011A38] border-t border-gray-800 pt-16 pb-8 font-mont">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+            <!-- Column 1 -->
+            <div>
+                <a href="{{ home_url }}" class="text-[white] font-bold text-2xl transition-colors">
+                    erica<span class="text-[#01C910]">Devs</span><span class="text-[white]">.</span>
+                </a>
+                <p class="text-[#0065E1] font-semibold tracking-wider text-sm mb-2 md:mb-4 uppercase">Design & Solve.</p>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    I’m a Business Information Technology student passionate about using technology to solve problems and create practical business solutions. I bridge business and technology, combining software, data, and creative thinking to build solutions that create real value.
+                </p>
+            </div>
+
+            <section class="grid grid-cols-2 gap-4 md:grid-cols-1 md:gap-8">
+                <!-- Column 2 -->
+                <div class="w-full flex flex-col items-start justify-center">
+                    <h4 class="text-[#01C910] font-bold mb-4 tracking-wide text-sm uppercase">Navigation</h4>
+                    <ul class="space-y-3 flex flex-col md:flex-row items-start justify-evenly md:gap-8">
+                        <li><a href="{{ home_url }}" class="text-gray-400 hover:text-[white] transition-colors text-sm">Home</a></li>
+                        <li><a href="{{ about_url }}" class="text-gray-400 hover:text-[white] transition-colors text-sm">About Me</a></li>
+                        <li><a href="{{ projects_url }}" class="text-gray-400 hover:text-[white] transition-colors text-sm">Projects</a></li>
+                        <li><a href="{{ services_url }}" class="text-gray-400 hover:text-[white] transition-colors text-sm">Services</a></li>
+                        <li><a href="{{ contacts_url }}" class="text-gray-400 hover:text-[white] transition-colors text-sm">Contact Me</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="w-full flex flex-col items-start justify-center">
+                    <h4 class="text-[#01C910] font-bold mb-4 tracking-wide text-sm uppercase">Connect</h4>
+                    <ul class="space-y-3 flex flex-col gap-2 md:flex-row items-start justify-evenly md:gap-8">
+                        <li><a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[white] transition-colors text-sm flex items-center"><img src="{% static 'images/github.png' %}" alt="GitHub" class="h-6 w-6 mr-2"> GitHub</a></li>
+
+                        <li><a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[white] transition-colors text-sm flex items-center"><img src="{% static 'images/linkedin.png' %}" alt="LinkedIn" class="h-6 w-6 mr-2"> LinkedIn</a></li>
+
+                        <li><a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[white] transition-colors text-sm flex items-center"><img src="{% static 'images/facebook.png' %}" alt="Facebook" class="h-6 w-6 mr-2"> Facebook</a></li>
+
+                        <li><a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[white] transition-colors text-sm flex items-center"><img src="{% static 'images/instagram.png' %}" alt="Instagram" class="h-6 w-6 mr-2"> Instagram</a></li>
+                    </ul>
+                </div>
+            </section>            
+        </div>
+
+        <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <p>© 2026 Nehemiah Erika Lorot. | Powered By The Lorots Technologies</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuButton = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (!menuButton || !mobileMenu) return;
+
+        const setMenuState = (isOpen) => {
+            mobileMenu.classList.toggle('hidden', !isOpen);
+            menuButton.setAttribute('aria-expanded', String(isOpen));
+            menuButton.innerHTML = isOpen
+                ? '<i data-lucide="x" class="h-6 w-6"></i>'
+                : '<i data-lucide="menu" class="h-6 w-6"></i>';
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        };
+
+        menuButton.addEventListener('click', function () {
+            const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+            setMenuState(!isOpen);
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                setMenuState(false);
+            });
+        });
+
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    });
+</script>
+</body>
+</html>

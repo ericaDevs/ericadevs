@@ -1,0 +1,293 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Nehemiah Erika Lorot | Projects
+{% endblock %}
+
+{% block content %}
+
+<main class="font-mont">
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden bg-[#DEFFE2] mb-12">
+        <div class="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+                    Turning ideas into
+                    <span class="text-[#01C910]">practical solutions.</span>
+                </h1>
+
+                <p class="mt-6 max-w-2xl text-base leading-8 text-white/70">
+                    A selection of digital projects where business thinking,
+                    technology, design and problem-solving come together to
+                    create useful solutions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section class="mb-12">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <!-- Section heading -->
+            <div class="max-w-2xl">
+                <p class="text-sm font-semibold uppercase tracking-widest text-[#0065E1]">
+                    Portfolio
+                </p>
+                <h2 class="mt-3 text-3xl text-[#011A38] font-bold tracking-tight">
+                    Selected projects
+                </h2>
+                <p class="mt-4 text-base leading-8">
+                    Projects that demonstrate how I approach business problems,
+                    technology and digital product development.
+                </p>
+            </div>
+
+            <!-- PROJECT GRID -->
+            <div class="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {% for project in projects %}
+                    <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900">
+
+                        <!-- Project image -->
+                        <a href="{% url 'projects:detail' project.slug %}" class="relative block aspect-16/10 overflow-hidden bg-slate-100 dark:bg-slate-800">
+                            {% if project.cover_photo %}
+                                <img src="{{ project.cover_photo.url }}" alt="{{ project.title }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                            {% else %}
+                                <div class="flex h-full items-center justify-center">
+                                    <i data-lucide="layers" class="h-12 w-12 text-slate-300 dark:text-slate-600"></i>
+                                </div>
+                            {% endif %}
+
+                            <!-- Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-[#011A38]/70 opacity-0 transition duration-300 group-hover:opacity-100">
+                                <span class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#011A38]">
+                                    View Case Study
+                                    <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+                                </span>
+                            </div>
+                        </a>
+
+                        <!-- Project content -->
+                        <div class="flex flex-1 flex-col p-6">
+                            {% if project.category %}
+                            <p class="text-xs font-semibold uppercase tracking-widest text-[#0065E1]">
+                                {{ project.category }}
+                            </p>
+                            {% endif %}
+
+                            <h3 class="mt-3 text-xl font-bold text-slate-900 dark:text-white">
+                                <a href="{% url 'projects:detail' project.slug %}"
+                                class="transition hover:text-[#0065E1]">
+                                    {{ project.title }}
+                                </a>
+                            </h3>
+
+                            <p class="mt-3 line-clamp-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                                {{ project.description }}
+                            </p>
+
+                            {% if project.technologies %}
+                                <div class="mt-5 flex flex-wrap gap-2">
+                                    {% for technology in project.technologies|slice:":4" %}
+                                    <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                                        {{ technology }}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            <div class="mt-6 border-t border-slate-100 pt-5 dark:border-slate-800">
+                                <a href="{% url 'projects:detail' project.slug %}"
+                                class="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 transition group-hover:text-[#0065E1] dark:text-white">
+                                    Explore project
+                                    <i data-lucide="arrow-right" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1">
+                                    </i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                {% empty %}
+
+                <div class="col-span-full rounded-2xl border border-dashed border-slate-300 py-20 text-center dark:border-slate-700">
+                    <i data-lucide="folder-open"
+                    class="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600">
+                    </i>
+                    <h3 class="mt-5 text-lg font-semibold text-slate-900 dark:text-white">
+                        Projects coming soon
+                    </h3>
+                    <p class="mx-auto mt-2 max-w-md text-sm text-slate-500">
+                        I'm currently building and documenting new projects.
+                        Check back soon to explore the work.
+                    </p>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- HOW I BUILD -->
+    <section class="sm:mb-16 bg-[#DEFFE2] py-18 md:mb-22">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-widest text-[#0065E1]">
+                        My Approach
+                    </p>
+                    <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                        I don't just build software. <span class="text-[#0065E1]"> I solve problems.</span>
+                    </h2>
+                    <p class="mt-5 leading-7">
+                        Every project begins with understanding the problem before
+                        choosing the technology. The goal is to create solutions
+                        that are useful, maintainable and aligned with real needs.
+                    </p>
+                </div>
+
+                <!-- Process -->
+                <div class="space-y-8">
+                    <div class="flex gap-5">
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center bg-[#0065E1] text-sm font-bold text-[white]">
+                            01
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#011A38]">
+                                Problem & Context
+                            </h3>
+                            <p class="mt-2 text-sm leading-6">
+                                Understand the users, business processes,
+                                challenges and desired outcomes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-5">
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center bg-[#01C910] text-sm font-bold text-[#011A38]">
+                            02
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#011A38]">
+                                Analysis & Strategy
+                            </h3>
+                            <p class="mt-2 text-sm leading-6">
+                                Break the problem down and determine the most
+                                practical approach to solving it.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="flex gap-5">
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center bg-[#0065E1] text-sm font-bold text-[white]">
+                            03
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#011A38]">
+                                Design & Development
+                            </h3>
+                            <p class="mt-2 text-sm leading-6">
+                                Design intuitive experiences and build reliable
+                                systems using appropriate technologies.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-5">
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center bg-[#01C910] text-sm font-bold text-[#011A38]">
+                            04
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#011A38]">
+                                Evaluate & Improve
+                            </h3>
+                            <p class="mt-2 text-sm leading-6">
+                                Test, learn from the results and continuously
+                                improve the solution.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PROJECT TYPES -->
+    <section class="py-20">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-sm font-semibold uppercase tracking-widest text-[#0065E1]">
+                    What I Build
+                </p>
+                <h2 class="mt-3 text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
+                    Technology applied to real needs.
+                </h2>
+            </div>
+
+            <div class="mt-14 grid sm:gap-6 sm:grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="rounded-2xl p-7 border border-[#72acf3]">
+                    <i data-lucide="globe" class="h-7 w-7 text-[#0065E1]"></i>
+                    <h3 class="mt-5 font-bold text-[#011A38]">
+                        Web Applications
+                    </h3>
+                    <p class="mt-3 text-sm leading-6">
+                        Responsive websites and full-stack applications designed
+                        around users and business objectives.
+                    </p>
+                </div>
+
+                <div class="rounded-2xl border border-[#72acf3] p-7">
+                    <i data-lucide="database" class="h-7 w-7 text-[#0065E1]"></i>
+                    <h3 class="mt-5 font-bold text-[#011A38]">
+                        Business Systems
+                    </h3>
+                    <p class="mt-3 text-sm leading-6">
+                        Digital systems that organize information, automate
+                        processes and support business operations.
+                    </p>
+                </div>
+
+                <div class="rounded-2xl border border-[#72acf3] p-7">
+                    <i data-lucide="palette" class="h-7 w-7 text-[#0065E1]"></i>
+                    <h3 class="mt-5 font-bold text-[#011A38]">
+                        Digital Experiences
+                    </h3>
+                    <p class="mt-3 text-sm leading-6">
+                        UI/UX and visual design that make digital products clear,
+                        usable and engaging.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="bg-[#CFE4FF] py-20 text-white lg:py-24">
+        <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">
+                <i data-lucide="lightbulb"
+                class="h-7 w-7 text-[#01C910]">
+                </i>
+            </div>
+            <h2 class="mt-7 text-3xl font-bold tracking-tight sm:text-4xl">Have a problem worth solving?</h2>
+            <p class="mx-auto mt-5 max-w-2xl leading-7 text-white/65">
+                Have an idea, a business challenge or a digital product in mind? Let’s turn it into a simple and practical solution.
+            </p>
+            <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+                <a href="{% url 'contacts:contacts' %}"
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#01C910] px-6 py-3.5 text-sm font-bold text-[#011A38] transition hover:bg-[#011A38] hover:text-[#FFFFFF]">
+                    Let's Connect 
+                    <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</main>
+{% endblock %}

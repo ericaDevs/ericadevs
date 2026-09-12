@@ -1,0 +1,199 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}Dashboard Overview{% endblock %}
+{% block breadcrumb %}Overview{% endblock %}
+{% block page_title %}Overview{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <!-- Top Summary KPI Cards -->
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Projects KPI -->
+        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs transition hover:border-slate-300">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Projects</p>
+                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#96c1f7] text-blue border border-blue-100">
+                    <i data-lucide="folder-kanban" class="h-4.5 w-4.5"></i>
+                </span>
+            </div>
+            <div class="mt-4 flex items-baseline justify-between">
+                <p class="text-3xl font-extrabold text-navy">{{ projects }}</p>
+                <a href="{% url 'dashboard:projects' %}" class="inline-flex items-center gap-1 text-xs font-semibold text-blue hover:underline">
+                    Manage
+                    <i data-lucide="arrow-right" class="h-3 w-3"></i>
+                </a>
+            </div>
+            <p class="mt-1 text-xs text-slate-500">Showcase items on your portfolio</p>
+        </div>
+
+        <!-- Contacts KPI -->
+        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs transition hover:border-slate-300">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Client Inquiries</p>
+                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-green border border-emerald-100">
+                    <i data-lucide="mail" class="h-4.5 w-4.5"></i>
+                </span>
+            </div>
+            <div class="mt-4 flex items-baseline justify-between">
+                <p class="text-3xl font-extrabold text-navy">{{ contacts }}</p>
+                <a href="{% url 'dashboard:contacts' %}" class="inline-flex items-center gap-1 text-xs font-semibold text-blue hover:underline">
+                    View Inbox
+                    <i data-lucide="arrow-right" class="h-3 w-3"></i>
+                </a>
+            </div>
+            <p class="mt-1 text-xs text-slate-500">Messages sent via contact form</p>
+        </div>
+
+        <!-- Live Website Status -->
+        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs transition hover:border-slate-300 sm:col-span-2 lg:col-span-1">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-500">System Status</p>
+                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-700 border border-slate-200">
+                    <i data-lucide="shield-check" class="h-4.5 w-4.5 text-emerald-600"></i>
+                </span>
+            </div>
+            <div class="mt-4 flex items-baseline justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="h-2.5 w-2.5 rounded-full bg-green"></span>
+                    <span class="text-sm font-bold text-navy">Operational</span>
+                </div>
+                <a href="/" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-blue hover:underline">
+                    Visit Site
+                    <i data-lucide="external-link" class="h-3 w-3"></i>
+                </a>
+            </div>
+            <p class="mt-1 text-xs text-slate-500">Live portfolio is accessible worldwide</p>
+        </div>
+    </div>
+
+    <!-- Quick Action Bar -->
+    <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+        <div class="flex items-center gap-3">
+            <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-navy">
+                <i data-lucide="zap" class="h-4 w-4"></i>
+            </span>
+            <p class="text-xs font-semibold text-navy">Quick Shortcuts</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+            <a href="{% url 'dashboard:projects' %}" class="inline-flex items-center gap-1.5 rounded-lg bg-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-hover transition">
+                <i data-lucide="plus" class="h-3.5 w-3.5"></i>
+                Add Project
+            </a>
+            <a href="{% url 'dashboard:contacts' %}" class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-navy hover:bg-slate-50 transition">
+                <i data-lucide="inbox" class="h-3.5 w-3.5 text-slate-500"></i>
+                Inbox ({{ contacts }})
+            </a>
+            <a href="/" target="_blank" class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition">
+                <i data-lucide="globe" class="h-3.5 w-3.5 text-slate-500"></i>
+                Open Public Site
+            </a>
+        </div>
+    </div>
+
+    <!-- Dynamic Two Column Grid: Recent Projects & Recent Inquiries -->
+    <div class="grid gap-6 lg:grid-cols-2">
+        <!-- Recent Projects Card -->
+        <div class="rounded-xl border border-slate-200 bg-white shadow-xs overflow-hidden flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50/70 px-5 py-3.5">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="folder-kanban" class="h-4 w-4 text-blue"></i>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">Recent Projects</h3>
+                    </div>
+                    <a href="{% url 'dashboard:projects' %}" class="text-xs font-semibold text-blue hover:underline">
+                        View All ({{ projects }})
+                    </a>
+                </div>
+
+                <div class="divide-y divide-slate-100">
+                    {% if recent_projects %}
+                        {% for p in recent_projects %}
+                        <div class="flex items-center justify-between p-4 hover:bg-slate-50/60 transition">
+                            <div class="flex items-center gap-3 min-w-0">
+                                {% if p.cover_photo %}
+                                    <img src="{{ p.cover_photo.url }}" alt="{{ p.title }}" class="h-9 w-12 rounded object-cover border border-slate-200 shrink-0" />
+                                {% else %}
+                                    <div class="flex h-9 w-12 items-center justify-center rounded border border-slate-200 bg-slate-100 text-slate-400 shrink-0">
+                                        <i data-lucide="image" class="h-4 w-4"></i>
+                                    </div>
+                                {% endif %}
+                                <div class="min-w-0">
+                                    <p class="text-xs font-bold text-navy truncate">{{ p.title }}</p>
+                                    <p class="text-[11px] text-slate-400">{{ p.date|date:"M d, Y" }}</p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 flex items-center gap-2">
+                                {% if p.technologies %}
+                                    <span class="hidden sm:inline-block rounded bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600 border border-slate-200">
+                                        {{ p.technologies.0 }}
+                                    </span>
+                                {% endif %}
+                                <a href="{% url 'projects:detail' p.slug %}" target="_blank" class="rounded p-1 text-slate-400 hover:text-blue transition" title="Preview project">
+                                    <i data-lucide="external-link" class="h-3.5 w-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="p-8 text-center">
+                            <i data-lucide="folder" class="mx-auto h-8 w-8 text-slate-300"></i>
+                            <p class="mt-2 text-xs font-semibold text-slate-600">No projects added yet</p>
+                            <a href="{% url 'dashboard:projects' %}" class="mt-2 inline-block text-xs font-semibold text-blue hover:underline">
+                                Create your first project &rarr;
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 bg-slate-50/50 p-3 text-center">
+                <a href="{% url 'dashboard:projects' %}" class="text-xs font-semibold text-slate-600 hover:text-blue transition">
+                    Manage all projects in dashboard &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Inquiries Card -->
+        <div class="rounded-xl border border-slate-200 bg-white shadow-xs overflow-hidden flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50/70 px-5 py-3.5">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="mail" class="h-4 w-4 text-green"></i>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">Recent Messages</h3>
+                    </div>
+                    <a href="{% url 'dashboard:contacts' %}" class="text-xs font-semibold text-blue hover:underline">
+                        View All ({{ contacts }})
+                    </a>
+                </div>
+
+                <div class="divide-y divide-slate-100">
+                    {% if recent_contacts %}
+                        {% for c in recent_contacts %}
+                        <div class="p-4 hover:bg-slate-50/60 transition">
+                            <div class="flex items-center justify-between">
+                                <p class="text-xs font-bold text-navy">{{ c.full_name }}</p>
+                                <span class="text-[11px] font-mono text-slate-400">{{ c.email }}</span>
+                            </div>
+                            <p class="text-xs font-semibold text-slate-700 mt-1">{{ c.subject }}</p>
+                            <p class="text-xs text-slate-500 mt-0.5 line-clamp-1 leading-normal">{{ c.message }}</p>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="p-8 text-center">
+                            <i data-lucide="inbox" class="mx-auto h-8 w-8 text-slate-300"></i>
+                            <p class="mt-2 text-xs font-semibold text-slate-600">No inquiries received yet</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Messages sent from the contact form will appear here.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 bg-slate-50/50 p-3 text-center">
+                <a href="{% url 'dashboard:contacts' %}" class="text-xs font-semibold text-slate-600 hover:text-blue transition">
+                    Open inbox &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

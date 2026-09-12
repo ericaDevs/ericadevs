@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Programming languages and tools">
+  <defs>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <image href="html.png" x="40" y="40" width="110" height="110" />
+    <image href="css3.png" x="180" y="40" width="110" height="110" />
+    <image href="javascript.png" x="320" y="40" width="110" height="110" />
+    <image href="tailwindcss.png" x="460" y="40" width="110" height="110" />
+    <image href="git.png" x="600" y="40" width="110" height="110" />
+    <image href="github.png" x="740" y="40" width="110" height="110" />
+
+    <image href="python.png" x="120" y="210" width="110" height="110" />
+    <image href="django.png" x="260" y="210" width="110" height="110" />
+    <image href="flask.png" x="400" y="210" width="110" height="110" />
+    <image href="mysql.png" x="540" y="210" width="110" height="110" />
+    <image href="postgresql.png" x="680" y="210" width="110" height="110" />
+  </g>
+</svg>
