@@ -437,6 +437,9 @@
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
   }
+  .mr-4 {
+    margin-right: calc(var(--spacing) * 4);
+  }
   .mb-1\.5 {
     margin-bottom: calc(var(--spacing) * 1.5);
   }
@@ -527,9 +530,6 @@
   .aspect-video {
     aspect-ratio: var(--aspect-video);
   }
-  .h-1 {
-    height: var(--spacing);
-  }
   .h-1\.5 {
     height: calc(var(--spacing) * 1.5);
   }
@@ -593,9 +593,6 @@
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
-  .h-\[92\%\] {
-    height: 92%;
-  }
   .h-auto {
     height: auto;
   }
@@ -613,9 +610,6 @@
   }
   .min-h-screen {
     min-height: 100vh;
-  }
-  .w-1 {
-    width: var(--spacing);
   }
   .w-1\.5 {
     width: calc(var(--spacing) * 1.5);
@@ -1048,9 +1042,6 @@
   .border-\[\#72acf3\] {
     border-color: #72acf3;
   }
-  .border-\[\#395d8a71\] {
-    border-color: #395d8a71;
-  }
   .border-amber-200 {
     border-color: var(--color-amber-200);
   }
@@ -1183,12 +1174,6 @@
   .bg-amber-50 {
     background-color: var(--color-amber-50);
   }
-  .bg-black\/10 {
-    background-color: color-mix(in srgb, #000 10%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-black) 10%, transparent);
-    }
-  }
   .bg-blue {
     background-color: var(--color-blue);
   }
@@ -1239,6 +1224,12 @@
   }
   .bg-shadegreen {
     background-color: var(--color-shadegreen);
+  }
+  .bg-shadegreen\/5 {
+    background-color: color-mix(in srgb, #DEFFE2 5%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-shadegreen) 5%, transparent);
+    }
   }
   .bg-slate-50 {
     background-color: var(--color-slate-50);
@@ -1770,12 +1761,6 @@
       color: color-mix(in oklab, var(--color-white) 65%, transparent);
     }
   }
-  .text-white\/70 {
-    color: color-mix(in srgb, #ffffff 70%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      color: color-mix(in oklab, var(--color-white) 70%, transparent);
-    }
-  }
   .text-white\/75 {
     color: color-mix(in srgb, #ffffff 75%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -2302,11 +2287,11 @@
     .md\:justify-start {
       justify-content: flex-start;
     }
+    .md\:gap-4 {
+      gap: calc(var(--spacing) * 4);
+    }
     .md\:gap-8 {
       gap: calc(var(--spacing) * 8);
-    }
-    .md\:gap-px {
-      gap: 1px;
     }
     .md\:p-10 {
       padding: calc(var(--spacing) * 10);
