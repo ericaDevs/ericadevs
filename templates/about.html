@@ -66,7 +66,7 @@
                 </div>
                 
                 <h1 class="text-2xl md:text-4xl font-bold text-[#011A38] leading-tight">
-                    Crafting Web Solutions with Code, <span class="text-[#0065E1]">Creativity, </span> and <span class="text-[#0065E1]"> Purpose</span>
+                    Crafting Web Solutions with <span class="text-[#0065E1]">Code</span>, <span class="text-[#0065E1]">Creativity</span>, and <span class="text-[#0065E1]"> Purpose</span>
                 </h1>
                 
                 <div class="space-y-4 text-base text-gray-600">
@@ -77,11 +77,11 @@
                 
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
                     <a href="{% url 'projects:projects' %}" class="inline-flex justify-center items-center px-8 py-4 bg-[#0065E1] text-[white] font-medium hover:bg-[#004394] transition-colors duration-300">
-                        View My Projects &rarr;
+                        View My Projects
                     </a>
-                    <a href="" class="inline-flex justify-center items-center px-8 py-4 bg-[#01C910] text-[#011A38] font-medium hover:bg-[#00a10d] hover:text-white transition-colors duration-300">
-                        View Resume &rarr;
-                    </a>
+                    <a href="{% static 'docs/Curiculum vitae.pdf' %}" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center px-8 py-4 bg-[#01C910] text-[#011A38] font-medium hover:bg-[#00a10d] hover:text-white transition-colors duration-300">
+                        View my CV
+                    </a>    
                 </div>
             </div>
             
@@ -314,7 +314,7 @@
     <!-- 5. SKILLS SECTION -->
     <section class="py-20 lg:py-32 bg-[#DEFFE2] overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-            <span class="text-sm font-semibold tracking-widest text-[#0065E1] uppercase block mb-3">What I Do Best</span>
+            <span class="text-sm font-semibold tracking-widest text-[#0065E1] uppercase block mb-3">Areas of Expertise</span>
             <h2 class="text-3xl md:text-4xl font-bold text-[#011A38] mb-4">My Skills & Capabilities.</h2>
             <p class="text-base text-gray-600 max-w-2xl leading-relaxed">
                 I work across design and development, allowing me to approach digital products from both the user's perspective and the engineering side.
@@ -323,9 +323,9 @@
 
         <section class="relative overflow-hidden py-8">
             <!-- Left fade -->
-            <div class="absolute left-0 top-0 z-10 h-full w-24 bg-linear-to-r from-white to-transparent"></div>
+            <div class="absolute left-0 top-0 z-10 h-full w-24 bg-linear-to-r from-[#DEFFE2] to-transparent"></div>
             <!-- Right fade -->
-            <div class="absolute right-0 top-0 z-10 h-full w-24 bg-linear-to-l from-white to-transparent"></div>
+            <div class="absolute right-0 top-0 z-10 h-full w-24 bg-linear-to-l from-[#DEFFE2] to-transparent"></div>
             <!-- Moving track -->
             <div class="flex w-max animate-marquee gap-12">
 
@@ -508,8 +508,8 @@
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="{% static 'docs/Curiculum vitae.pdf' %}" download class="inline-flex justify-center items-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold hover:bg-[#011A38] hover:text-[#FFFFFF] transition-colors duration-300">
-                            Download CV &darr;
+                        <a href="{% static 'docs/Curiculum vitae.pdf' %}" download class="inline-flex justify-center items-center px-6 py-3 bg-[#0065E1] text-[#FFFFFF] font-semibold hover:bg-[#004394] transition-colors duration-300">
+                            Download my CV &darr;
                         </a>
                     </div>
                 </div>
@@ -640,15 +640,15 @@
             <span class="text-sm font-semibold tracking-widest text-[#01C910] uppercase block mb-3">Let's Build Something</span>
             <h2 class="text-4xl md:text-5xl font-bold text-[#011A38] mb-6">Have an Idea Worth Building?</h2>
             <p class="text-lg text-gray-600 mb-10 max-w-xl mx-auto">
-                Whether you need a website, a digital experience or a custom solution, I'd love to hear what you're working on.
+                I’m open to conversations around digital projects, business challenges, collaborations, and new opportunities.
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{% url 'contacts:contacts' %}" class="inline-flex justify-center items-center px-8 py-4 bg-[#0065E1] text-[white] font-semibold hover:bg-blue-700 transition-colors duration-300">
-                    Start a Conversation &rarr;
+                    Start a Conversation
                 </a>
                 <a href="{% url 'projects:projects' %}" class="inline-flex justify-center items-center px-8 py-4 bg-[#01C910] text-[#011A38] font-semibold hover:bg-[#01C910]/80 transition-colors duration-300">
-                    View My Projects &rarr;
+                    View My Projects
                 </a>
             </div>
         </div>

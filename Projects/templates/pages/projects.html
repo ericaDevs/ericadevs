@@ -11,7 +11,7 @@ Nehemiah Erika Lorot | Projects
     <section class="relative overflow-hidden bg-[#DEFFE2] mb-12">
         <div class="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
             <div class="max-w-3xl">
-                <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+                <h1 class="mt-7 text-4xl font-bold tracking-tight sm:text-5xl">
                     Turning ideas into
                     <span class="text-[#01C910]">practical solutions.</span>
                 </h1>
@@ -57,14 +57,6 @@ Nehemiah Erika Lorot | Projects
                                     <i data-lucide="layers" class="h-12 w-12 text-slate-300 dark:text-slate-600"></i>
                                 </div>
                             {% endif %}
-
-                            <!-- Overlay -->
-                            <div class="absolute inset-0 flex items-center justify-center bg-[#011A38]/70 opacity-0 transition duration-300 group-hover:opacity-100">
-                                <span class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#011A38]">
-                                    View Case Study
-                                    <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
-                                </span>
-                            </div>
                         </a>
 
                         <!-- Project content -->
@@ -85,16 +77,6 @@ Nehemiah Erika Lorot | Projects
                             <p class="mt-3 line-clamp-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                 {{ project.description }}
                             </p>
-
-                            {% if project.technologies %}
-                                <div class="mt-5 flex flex-wrap gap-2">
-                                    {% for technology in project.technologies|slice:":4" %}
-                                    <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-                                        {{ technology }}
-                                    </span>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
 
                             <div class="mt-6 border-t border-slate-100 pt-5 dark:border-slate-800">
                                 <a href="{% url 'projects:detail' project.slug %}"
@@ -266,20 +248,14 @@ Nehemiah Erika Lorot | Projects
     <!-- CTA -->
     <section class="bg-[#CFE4FF] py-20 lg:py-24">
         <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
-            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">
-                <i data-lucide="lightbulb"
-                class="h-7 w-7 text-[#01C910]">
-                </i>
-            </div>
             <h2 class="mt-7 text-3xl font-bold tracking-tight sm:text-4xl">Have a problem worth solving?</h2>
             <p class="mx-auto mt-5 max-w-2xl leading-7">
                 Have an idea, a business challenge or a digital product in mind? Let’s turn it into a simple and practical solution.
             </p>
             <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
                 <a href="{% url 'contacts:contacts' %}"
-                class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#01C910] px-6 py-3.5 text-sm font-bold text-[#011A38] transition hover:bg-[#011A38] hover:text-[#FFFFFF]">
-                    Let's Connect 
-                    <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#01C910] px-6 py-3.5 text-base font-bold text-[#011A38] transition hover:bg-[#011A38] hover:text-[#FFFFFF]">
+                    Let's Connect
                 </a>
             </div>
         </div>
