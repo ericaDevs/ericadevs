@@ -27,18 +27,26 @@ def contacts_view(request):
                 f"Message:\n{contact.message}\n"
             )
 
-            try:
-                email = EmailMessage(
-                    subject=email_subject,
-                    body=email_body,
-                    from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', None),
-                    to=[recipient],
-                    reply_to=[contact.email],
+            email_user = getattr(settings, 'EMAIL_HOST_USER', None)
+            email_password = getattr(settings, 'EMAIL_HOST_PASSWORD', None)
+            if email_user and email_password:
+                try:
+                    email = EmailMessage(
+                        subject=email_subject,
+                        body=email_body,
+                        from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', email_user),
+                        to=[recipient],
+                        reply_to=[contact.email],
+                    )
+                    email.send(fail_silently=False)
+                except Exception as e:
+                    # Log the error — the DB record is safe, don't 500 the user
+                    logger.error("Failed to send contact notification email: %s", e)
+            else:
+                logger.warning(
+                    "Email credentials not configured (EMAIL_HOST_USER/PASSWORD missing). "
+                    "Skipping notification email for contact from %s.", contact.email
                 )
-                email.send(fail_silently=False)
-            except Exception as e:
-                # Log error so the database record isn't lost and the client isn't shown a 500 error
-                logger.error("Failed to send contact notification email: %s", e)
 
             messages.success(request, "Message sent successfully!")
             return redirect('contacts:contacts')
