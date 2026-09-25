@@ -122,6 +122,66 @@ def projects_view(request):
     })
 
 
+# EDIT PROJECT
+@login_required
+def edit_project_view(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    is_ajax = (
+        request.headers.get('x-requested-with') == 'XMLHttpRequest' or
+        'application/json' in request.headers.get('Accept', '')
+    )
+
+    if request.method == 'GET':
+        technologies_str = ', '.join(project.technologies) if isinstance(project.technologies, list) else (project.technologies or '')
+        cover_photo_url = project.cover_photo.url if project.cover_photo else None
+        return JsonResponse({
+            'success': True,
+            'project': {
+                'id': project.id,
+                'title': project.title,
+                'date': project.date.strftime('%Y-%m-%d') if project.date else '',
+                'technologies': technologies_str,
+                'url': project.url or '',
+                'description': project.description or '',
+                'problem': project.problem or '',
+                'solution': project.solution or '',
+                'cover_photo_url': cover_photo_url,
+            }
+        })
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES, instance=project)
+        if form.is_valid():
+            try:
+                updated_project = form.save()
+            except Exception as exc:
+                logger.error("Error updating project: %s", exc)
+                err_msg = "Failed to update project. Please try again."
+                messages.error(request, err_msg)
+                if is_ajax:
+                    return JsonResponse({'success': False, 'message': err_msg, 'errors': {}}, status=500)
+                return redirect('dashboard:projects')
+
+            messages.success(request, f'Project "{updated_project.title}" was updated successfully.')
+            if is_ajax:
+                return JsonResponse({
+                    'success': True,
+                    'message': f'Project "{updated_project.title}" was updated successfully.',
+                    'redirect_url': '/dashboard/projects/',
+                })
+            return redirect('dashboard:projects')
+
+        messages.error(request, 'Please correct the errors in the form.')
+        if is_ajax:
+            errors = {field: [str(err) for err in errs] for field, errs in form.errors.items()}
+            return JsonResponse({
+                'success': False,
+                'message': 'Please correct the errors in the form.',
+                'errors': errors,
+            }, status=400)
+        return redirect('dashboard:projects')
+
+
 # DELETE PROJECT
 @login_required
 def delete_project_view(request, pk):

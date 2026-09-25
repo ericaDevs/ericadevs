@@ -111,6 +111,47 @@ class DashboardAuthenticationTests(TestCase):
 		self.assertFalse(data.get('success'))
 		self.assertIn('errors', data)
 
+	def test_edit_project_get_data(self):
+		self.client.force_login(self.user)
+		project = Project.objects.create(
+			title='Original Project',
+			description='Original Desc',
+			problem='Original Problem',
+			solution='Original Solution',
+			technologies=['Python', 'Django'],
+			url='https://example.com/orig',
+			date='2026-09-10',
+		)
+		response = self.client.get(f'/dashboard/projects/{project.id}/edit/')
+		self.assertEqual(response.status_code, 200)
+		data = response.json()
+		self.assertTrue(data.get('success'))
+		self.assertEqual(data['project']['title'], 'Original Project')
+		self.assertEqual(data['project']['technologies'], 'Python, Django')
+
+	def test_edit_project_post_update(self):
+		self.client.force_login(self.user)
+		project = Project.objects.create(
+			title='Original Title',
+			description='Original Desc',
+			problem='Original Problem',
+			solution='Original Solution',
+			technologies=['Python'],
+			date='2026-09-10',
+		)
+		response = self.client.post(f'/dashboard/projects/{project.id}/edit/', {
+			'title': 'Updated Title',
+			'description': 'Updated Desc',
+			'problem': 'Updated Problem',
+			'solution': 'Updated Solution',
+			'technologies': 'Python, FastAPI',
+			'date': '2026-09-11',
+		})
+		self.assertRedirects(response, '/dashboard/projects/')
+		project.refresh_from_db()
+		self.assertEqual(project.title, 'Updated Title')
+		self.assertEqual(project.technologies, ['Python', 'FastAPI'])
+
 	def test_delete_project(self):
 		self.client.force_login(self.user)
 		project = Project.objects.create(

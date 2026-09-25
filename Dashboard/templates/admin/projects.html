@@ -96,6 +96,10 @@
                                         <i data-lucide="eye" class="h-3.5 w-3.5"></i>
                                         <span>View</span>
                                     </a>
+                                    <button type="button" onclick="openEditProjectModal('{{ project.id }}')" class="inline-flex items-center gap-1 rounded-md border border-blue-200 bg-blue-50 px-2.5 py-1.5 text-xs font-semibold text-blue hover:bg-blue-100 transition cursor-pointer" title="Edit project">
+                                        <i data-lucide="edit-3" class="h-3.5 w-3.5"></i>
+                                        <span>Edit</span>
+                                    </button>
                                     <button type="button" onclick="confirmDelete('{{ project.id }}', '{{ project.title|escapejs }}')" class="inline-flex items-center gap-1 rounded-md border border-red-200 bg-red-50 px-2.5 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-100 transition cursor-pointer" title="Delete project">
                                         <i data-lucide="trash-2" class="h-3.5 w-3.5"></i>
                                         <span>Delete</span>
@@ -129,7 +133,7 @@
 </section>
 
 <!-- ========================================== -->
-<!-- ADD PROJECT MODAL DIALOG (CLEAN & SOLID)   -->
+<!-- ADD / EDIT PROJECT MODAL DIALOG            -->
 <!-- ========================================== -->
 <div id="project-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-navy/60 p-4 sm:p-6 md:p-10" aria-modal="true" role="dialog" aria-labelledby="modal-title">
     <div class="min-h-full flex items-center justify-center py-6">
@@ -137,12 +141,12 @@
             <!-- Modal Header -->
             <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-6 py-4">
                 <div class="flex items-center gap-3">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue text-white">
+                    <div id="modal-header-icon" class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue text-white">
                         <i data-lucide="plus-circle" class="h-5 w-5"></i>
                     </div>
                     <div>
                         <h3 id="modal-title" class="text-lg font-bold text-navy">Add New Project</h3>
-                        <p class="text-xs text-slate-500">Provide details, media, and tech stack for your portfolio showcase.</p>
+                        <p id="modal-subtitle" class="text-xs text-slate-500">Provide details, media, and tech stack for your portfolio showcase.</p>
                     </div>
                 </div>
                 <button type="button" onclick="closeProjectModal()" class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-200 hover:text-slate-700 transition" aria-label="Close modal">
@@ -216,6 +220,13 @@
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                         Cover Photo
                     </label>
+                    <div id="current-cover-container" class="hidden mb-2 items-center gap-3 p-2.5 rounded-lg border border-slate-200 bg-slate-50">
+                        <img id="current-cover-img" src="" alt="Current Cover" class="h-12 w-16 object-cover rounded border border-slate-200" />
+                        <div class="text-xs text-slate-600 flex-1">
+                            <span class="font-medium text-slate-700">Current cover photo</span>
+                            <p class="text-[11px] text-slate-400">Select a new image below if you want to replace it.</p>
+                        </div>
+                    </div>
                     <div id="file-drop-zone" class="border-2 border-dashed border-slate-300 rounded-xl p-5 text-center bg-slate-50 hover:bg-slate-100 hover:border-slate-400 transition cursor-pointer" onclick="document.getElementById('id_cover_photo').click()">
                         {{ form.cover_photo }}
                         <div class="flex flex-col items-center justify-center gap-1.5">
@@ -333,13 +344,87 @@
     const fileNameContainer = document.getElementById('selected-file-name');
     const errorBanner = document.getElementById('modal-error-banner');
 
+    const modalTitle = document.getElementById('modal-title');
+    const modalSubtitle = document.getElementById('modal-subtitle');
+    const modalHeaderIcon = document.getElementById('modal-header-icon');
+    const currentCoverContainer = document.getElementById('current-cover-container');
+    const currentCoverImg = document.getElementById('current-cover-img');
+
     function openProjectModal() {
+        form.action = "{% url 'dashboard:projects' %}";
+        modalTitle.textContent = "Add New Project";
+        modalSubtitle.textContent = "Provide details, media, and tech stack for your portfolio showcase.";
+        btnText.textContent = "Save Project";
+        modalHeaderIcon.innerHTML = '<i data-lucide="plus-circle" class="h-5 w-5"></i>';
+        
+        form.reset();
+        clearErrors();
+        if (fileNameContainer) fileNameContainer.classList.add('hidden');
+        if (currentCoverContainer) currentCoverContainer.classList.add('hidden');
+        
         modal.classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
+        if (window.lucide) window.lucide.createIcons();
+
         const titleInput = document.getElementById('{{ form.title.id_for_label }}');
         if (titleInput) {
             setTimeout(() => titleInput.focus(), 100);
         }
+    }
+
+    function openEditProjectModal(projectId) {
+        clearErrors();
+        form.reset();
+        if (fileNameContainer) fileNameContainer.classList.add('hidden');
+        if (currentCoverContainer) currentCoverContainer.classList.add('hidden');
+
+        form.action = '/dashboard/projects/' + projectId + '/edit/';
+        modalTitle.textContent = "Edit Project";
+        modalSubtitle.textContent = "Update details, narrative, technologies, and cover media.";
+        btnText.textContent = "Update Project";
+        modalHeaderIcon.innerHTML = '<i data-lucide="edit-3" class="h-5 w-5"></i>';
+
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+        if (window.lucide) window.lucide.createIcons();
+
+        // Fetch project details via AJAX
+        fetch('/dashboard/projects/' + projectId + '/edit/', {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.project) {
+                const p = data.project;
+                const titleEl = document.getElementById('{{ form.title.id_for_label }}');
+                const dateEl = document.getElementById('{{ form.date.id_for_label }}');
+                const techEl = document.getElementById('{{ form.technologies.id_for_label }}');
+                const urlEl = document.getElementById('{{ form.url.id_for_label }}');
+                const descEl = document.getElementById('{{ form.description.id_for_label }}');
+                const probEl = document.getElementById('{{ form.problem.id_for_label }}');
+                const solEl = document.getElementById('{{ form.solution.id_for_label }}');
+
+                if (titleEl) titleEl.value = p.title || '';
+                if (dateEl) dateEl.value = p.date || '';
+                if (techEl) techEl.value = p.technologies || '';
+                if (urlEl) urlEl.value = p.url || '';
+                if (descEl) descEl.value = p.description || '';
+                if (probEl) probEl.value = p.problem || '';
+                if (solEl) solEl.value = p.solution || '';
+
+                if (p.cover_photo_url && currentCoverContainer && currentCoverImg) {
+                    currentCoverImg.src = p.cover_photo_url;
+                    currentCoverContainer.classList.remove('hidden');
+                    currentCoverContainer.classList.add('flex');
+                }
+            }
+        })
+        .catch(err => {
+            console.error('Failed to load project details for editing:', err);
+        });
     }
 
     function closeProjectModal() {
