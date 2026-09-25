@@ -9,6 +9,14 @@
             My Portfolio
         {% endblock %}
     </title>
+    <meta name="description" content="{% block meta_description %}Explore the portfolio of Nehemiah Erika Lorot, a business technology strategist and software developer creating practical digital solutions.{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}ericaDevs | Business Technology and Software Development{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Business-minded technology and software development for practical digital solutions.{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta name="twitter:card" content="summary">
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <script src="https://unpkg.com/lucide@latest"></script>
 <style>
