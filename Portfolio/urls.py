@@ -21,8 +21,6 @@ from django.urls import path, include, re_path
 from . import views
 from Dashboard import views as dashboard_views
 
-app_name = "main"
-
 urlpatterns = [
     path('admin/', dashboard_views.login_admin, name = "admin"),
     path('', views.home_view, name="home"),

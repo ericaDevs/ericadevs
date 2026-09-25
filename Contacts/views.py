@@ -1,4 +1,5 @@
 import logging
+import threading
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import EmailMessage
@@ -16,9 +17,13 @@ def contacts_view(request):
             # Save the contact to the database first — this must always succeed.
             contact = form.save()
 
-            # Attempt to send an email notification. This is best-effort only.
-            # Any failure here must NOT produce a 500 — the message is already saved.
-            _send_contact_notification(contact)
+            # Attempt to send an email notification in the background.
+            # This is best-effort and will never block the user response or trigger Gunicorn worker timeouts.
+            threading.Thread(
+                target=_send_contact_notification,
+                args=(contact,),
+                daemon=True,
+            ).start()
 
             messages.success(request, "Message sent successfully!")
             return redirect('contacts:contacts')
@@ -36,7 +41,8 @@ def _send_contact_notification(contact):
         email_user = getattr(settings, 'EMAIL_HOST_USER', None)
         email_password = getattr(settings, 'EMAIL_HOST_PASSWORD', None)
 
-        if not email_user or not email_password:
+        is_locmem = getattr(settings, 'EMAIL_BACKEND', '').endswith('locmem.EmailBackend')
+        if not is_locmem and (not email_user or not email_password):
             logger.warning(
                 "Email credentials not configured (EMAIL_HOST_USER / EMAIL_HOST_PASSWORD). "
                 "Skipping notification email for contact from %s.",
@@ -44,8 +50,8 @@ def _send_contact_notification(contact):
             )
             return
 
-        recipient = getattr(settings, 'CONTACT_RECIPIENT_EMAIL', None) or email_user
-        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None) or email_user
+        recipient = getattr(settings, 'CONTACT_RECIPIENT_EMAIL', None) or email_user or "admin@example.com"
+        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None) or email_user or "no-reply@example.com"
 
         subject = f"New Portfolio Message: {contact.subject} (from {contact.full_name})"
         body = (
