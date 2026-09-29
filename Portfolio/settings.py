@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_supabase_storage',  # Supabase Storage Integration
     'Projects',
     'Contacts',
     'Dashboard',
@@ -134,8 +135,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Local fallback images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/static/'
@@ -144,16 +144,20 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Supabase Storage Configuration
+SUPABASE_URL = os.environ.get('SUPABASE_URL')
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
+SUPABASE_BUCKET = os.environ.get('SUPABASE_BUCKET', 'portfolio-media')
+
+# Combined Storage Handlers (Supabase for uploaded media, WhiteNoise for CSS/JS)
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "django_supabase_storage.SupabaseMediaStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-LOGIN_URL = 'dashboard:login'
